@@ -1,0 +1,17 @@
+@mixin flex($justify: none, $align: none, $direction: none) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+}
+
+@mixin maxsize() {
+  width: 100%;
+  height: 100%;
+}
+
+@mixin resp($minMax, $screen) {
+  @media ($minMax: $screen+'px') {
+    @content;
+  }
+}

@@ -1,0 +1,47 @@
+<mat-toolbar class="navbar">
+  <div class="search">
+    <input />
+    <mat-icon>search</mat-icon>
+  </div>
+
+  <span class="logo" [routerLink]="['/home/0']">║ ＣＬＯＴＨＩＮＧ ║</span>
+
+  <div class="utils">
+    <button class="home" mat-button [routerLink]="['/home/0']">
+      <mat-icon> home </mat-icon>
+    </button>
+
+    <button mat-button [routerLink]="['/cart']">
+      <mat-icon
+        matBadge="{{ cartCount }}"
+        matBadgeColor="warn"
+        matBadgeSize="small"
+        class="cartIcon"
+      >
+        shopping_basket
+      </mat-icon>
+      <label class="cartLabel">My cart</label>
+    </button>
+
+    <span style="margin-right: 10px" class="separator"></span>
+    <button mat-button [matMenuTriggerFor]="menuAccount">
+      <mat-icon> account_circle </mat-icon>
+      <label class="accountLabel"> My account</label>
+    </button>
+    <mat-menu #menuAccount="matMenu">
+      <ng-container *ngIf="!loggedIn(); else logoutTemplate">
+        <button [routerLink]="['/login']" mat-menu-item>
+          <span>Login</span>
+        </button>
+        <button [routerLink]="['/register']" mat-menu-item>
+          <span>Register</span>
+        </button>
+      </ng-container>
+      <ng-template #logoutTemplate>
+        <button [routerLink]="['/home/0']" (click)="logout()" mat-menu-item>
+          <span>Logout</span>
+        </button>
+      </ng-template>
+    </mat-menu>
+  </div>
+</mat-toolbar>

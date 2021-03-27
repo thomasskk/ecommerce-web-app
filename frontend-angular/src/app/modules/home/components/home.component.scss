@@ -1,0 +1,67 @@
+@import 'global';
+
+.headerImg {
+  @include flex(center, center);
+
+  img {
+    @include maxsize;
+    object-fit: fill;
+  }
+
+  .text {
+    @include flex(none, none, column);
+    text-align: center;
+    position: absolute;
+    display: flex;
+    hr {
+      flex: 1;
+      border: 1px solid black;
+      width: calc(3vw + 3vh);
+      margin-bottom: 2px;
+    }
+    h1 {
+      margin: 0;
+      font-weight: 100;
+      font-size: 32px;
+      font-family: 'Raleway', Helvetica, Arial, sans-serif;
+    }
+  }
+}
+
+.container {
+  @include flex(space-between);
+  flex-wrap: wrap;
+}
+
+.item {
+  @include flex(center, center, column);
+  border-radius: 8px 8px 15px 15px;
+  width: 250px;
+  margin: 30px;
+  @include resp(max-width, 1000) {
+    margin: 30px auto auto auto;
+  }
+
+  img {
+    @include maxsize;
+    object-fit: scale-down;
+  }
+  button {
+    border: none;
+    height: 50px;
+    width: 60%;
+    border-radius: 8px;
+    * {
+      vertical-align: middle;
+    }
+  }
+  .price {
+    font-weight: 800;
+  }
+}
+
+.page {
+  @include flex(center, center);
+  overflow: hidden;
+  padding-bottom: 75px;
+}

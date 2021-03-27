@@ -1,0 +1,22 @@
+@import 'global';
+
+.body {
+  @include flex(center, center);
+  @include maxsize;
+}
+
+.container {
+  @include flex(center, center);
+  padding: 50px;
+  border-radius: 10px;
+  border-color: black;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  flex-direction: column;
+
+  button {
+    width: 110px;
+  }
+  mat-form-field {
+    width: 200px;
+  }
+}

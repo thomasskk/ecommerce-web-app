@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+
+<div class="body">
+  <div class="container">
+    <div class="item" *ngFor="let item of cartItems; let index = index">
+      <div class="img">
+        <img mat-card-image src="{{ item.image }}" alt="" />
+      </div>
+      <p class="name">{{ item.name }}</p>
+      <p class="price">Price : {{ item.price }}$</p>
+      <p class="quantity">x{{ item.quantity }}</p>
+      <mat-icon class="delete" (click)="removeItem(item.name)"> delete </mat-icon>
+    </div>
+    <div class="total">
+      <p>TOTAL &nbsp;</p>
+      <p style="font-weight: 600">{{ total }}$</p>
+    </div>
+  </div>
+</div>

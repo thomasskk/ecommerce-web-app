@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+
+<div class="headerImg" *ngIf="page === 0">
+  <div class="text">
+    <h1>NEW COLLECTION</h1>
+    <hr />
+    <h2>2021</h2>
+  </div>
+  <img src="../../../../assets/1.jpg" alt="" />
+</div>
+
+<div class="container">
+  <div class="item" *ngFor="let item of items$ | async">
+    <img src="{{ item.image }}" />
+    <p class="name">{{ item.name }}</p>
+    <p class="price">{{ item.price }}$</p>
+    <button (click)="addCart(item.name)">
+      <mat-icon class="addShop"> add_shopping_cart </mat-icon>
+    </button>
+  </div>
+</div>
+
+<div class="page">
+  <button mat-raised-button [routerLink]="['/home/', page]" (click)="changePage(-1)">
+    Previous
+  </button>
+  <button
+    mat-button
+    [routerLink]="['/home/', index + page]"
+    (click)="changePage(index)"
+    *ngFor="let item of items$ | async; let index = index"
+  >
+    {{ index + page }}
+  </button>
+  <button mat-raised-button [routerLink]="['/home/', page]" (click)="changePage(1)">Next</button>
+</div>

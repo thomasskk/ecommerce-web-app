@@ -1,0 +1,76 @@
+@import 'global';
+
+* {
+  color: black;
+  background-color: white;
+}
+.navbar {
+  @include flex();
+  padding: 0 100px 0 100px;
+  @include resp(max-width, 1000) {
+    padding: 0 10px 0 10px;
+  }
+
+  .search {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    input {
+      width: 40%;
+      @include resp(max-width, 1000) {
+        width: 100%;
+      }
+      outline: none;
+      border: 0;
+      border-bottom: 1px solid;
+      &:focus {
+        border-bottom: 2px solid;
+      }
+    }
+    mat-icon {
+      vertical-align: middle;
+      margin-left: 3px;
+      cursor: pointer;
+    }
+  }
+
+  .cartIcon {
+    margin-right: 10px;
+  }
+
+  .utils {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .logo {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    outline: none;
+    @include resp(max-width, 1000) {
+      display: none;
+    }
+  }
+
+  .home {
+    @include resp(min-width, 1000) {
+      display: none;
+    }
+  }
+}
+
+@include resp(max-width, 1000) {
+  .logo,
+  .cartLabel,
+  .accountLabel,
+  .separator {
+    display: none;
+  }
+  button {
+    padding: 0 5px 0 5px;
+    width: 40px;
+    min-width: 0;
+  }
+}
