@@ -6,32 +6,39 @@
     <hr />
     <h2>2021</h2>
   </div>
-    <img  src="../../../../assets/1.png" alt="" />
+  <img src="../../../../assets/1.png" alt="" />
 </div>
 
 <div class="container">
   <div class="item" *ngFor="let item of items$ | async">
     <div class="img">
       <img src="{{ item.image }}" />
-      <img class="cartIcon" src="../../../../assets/cartIcon.svg" alt="" (click)="addCart(item.name)">
-    </div >
-      <p class="namePrice">{{ item.name }} <br> 
-        {{ item.price }} $
-      </p>  
+      <img
+        class="cartIcon"
+        src="../../../../assets/cartIcon.svg"
+        alt=""
+        (click)="addCart(item.dname)"
+      />
+    </div>
+    <p class="namePrice">
+      {{ item.name }} <br />
+      {{ item.price }} $
+    </p>
   </div>
 </div>
 
 <div class="page">
-  <button mat-raised-button [routerLink]="['/home/', page]" (click)="changePage(-1)">
-    Previous
-  </button>
-  <button
-    mat-button
-    [routerLink]="['/home/', index + page]"
-    (click)="changePage(index)"
-    *ngFor="let item of items$ | async; let index = index"
-  >
-    {{ index + page }}
-  </button>
-  <button mat-raised-button [routerLink]="['/home/', page]" (click)="changePage(1)">Next</button>
+  <button *ngIf="page != 0" mat-raised-button [routerLink]="['/home/', page - 1]">Previous</button>
+  <ng-container *ngFor="let item of [].constructor(7); let index = index">
+    <button
+      mat-button
+      [routerLink]="['/home/', index - 3 + page]"
+      [style.text-decoration]="index === 3 ? 'underline' : 'none'"
+      *ngIf="index - 3 + page > -1"
+    >
+      {{ index - 3 + page }}
+    </button>
+  </ng-container>
+
+  <button mat-raised-button [routerLink]="['/home/', page + 1]">Next</button>
 </div>

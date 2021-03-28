@@ -1,36 +1,72 @@
 <app-navbar></app-navbar>
 
-<div class="body">
-  <div class="containerInfo">
-    <div class="item" *ngFor="let item of cartItems; let indexCart = index">
-      <div class="img">
-        <img src="{{ item.image }}" />
-      </div>
-
-      <div class="textItem">
-        <p class="namePrice">
-          {{ item.name }} <br />
-          {{ item.price }} $
-        </p>
-
-        <select #select class="quantity" (change)="changeQuantity(item.dname, select.value, indexCart)">
-          <option
-            *ngFor="let stock of [].constructor(item.stock); let indexStock = index"
-            [attr.selected]="indexStock + 1 === item.quantity ? true : null"
-            value="{{ indexStock + 1 }}" 
-            
+<div class="container">
+  <h1>Shopping bag</h1>
+  <div class="core">
+    <div class="empty" *ngIf="total === 0">
+      <h2>YOUR SHOPPING BAG IS EMPTY!</h2>
+      <p>Sign in or login to save or access saved items in your shopping bag.</p>
+    </div>
+    <div class="containerInfo">
+      <div class="item" *ngFor="let item of cartItems; let indexCart = index">
+        <div class="img">
+          <img src="{{ item.image }}" />
+        </div>
+  
+        <div class="textItem">
+          <p class="namePrice">
+            {{ item.name }} <br />
+            {{ item.price }} $
+          </p>
+  
+          <select
+            #select
+            class="quantity"
+            (change)="changeQuantity(item.dname, select.value, indexCart)"
           >
-            {{ indexStock + 1 }}
-          </option>
-        </select>
+            <option
+              *ngFor="let stock of [].constructor(item.stock); let indexStock = index"
+              [attr.selected]="indexStock + 1 === item.quantity ? true : null"
+              value="{{ indexStock + 1 }}"
+            >
+              {{ indexStock + 1 }}
+            </option>
+          </select>
+        </div>
+        <button class="cross" (click)="removeItem(item.dname, indexCart)">
+          <img src="../../../../assets/cross.png" alt="" />
+        </button>
       </div>
-      <img
-        class="cross"
-        src="../../../../assets/cross.png"
-        alt=""
-        (click)="removeItem(item.dname, indexCart)"
-      />
+    </div>
+    <div class="containerPay">
+      <span>ADD A DISCOUNT CODE</span>
+      <div class="discount">
+        <div class="input">
+          <input type="text" />
+        </div>
+        <button>ADD</button>
+      </div>
+      <span>Login in to get the best offers !</span>
+      <button class="connect">LOGIN</button>
+      <ng-container *ngIf="total != 0">
+        <div class="orderValue">
+          <span>ORDER VALUE</span>
+          <span>{{ total }} $</span>
+        </div>
+        <div class="shipping">
+          <span>Shipping</span>
+          <span>4,99 $</span>
+        </div>
+      </ng-container>
+  
+      <hr />
+      <div class="total">
+        <span>Total:</span>
+        <span>{{ total != 0 ? total+4.99 +" $" : '0 $' }}</span>
+      </div>
+      <button class="finish" [attr.disabled]="total === 0 ? true : null">CONTINUE TO CHECKOUT</button>
     </div>
   </div>
-  <div class="containerPay"></div>
+  
+
 </div>

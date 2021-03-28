@@ -9,6 +9,8 @@ const addItem = async (req: Request, res: Response) => {
   try {
     const name = decodeURIComponent(req.params.name)
     const username = res.locals.jwt.username
+    console.log(name);
+    
 
     let user = await User.findOne({ username }).exec()
     let item = await Item.findOne({ name }).exec()

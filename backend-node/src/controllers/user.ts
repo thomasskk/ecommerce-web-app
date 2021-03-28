@@ -27,7 +27,7 @@ const login = async (req: Request, res: Response) => {
     return res.json({ message: error.message, error }).status(500)
   }
 }
-
+    
 const register = async (req: Request, res: Response) => {
   if (req.body.username === req.body.password) {
     return res.status(500).json({ message: 'The username and the password cant be the same' })
