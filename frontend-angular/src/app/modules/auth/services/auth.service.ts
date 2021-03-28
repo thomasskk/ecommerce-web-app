@@ -11,7 +11,11 @@ export class AuthService {
 
   login(username: string, password: string) {
     return this.http
-      .post<any>(`${GlobalVariable.API_URL}/user/login`, { username, password }, { observe: 'response' })
+      .post<any>(
+        `${GlobalVariable.API_URL}/user/login`,
+        { username, password },
+        { observe: 'response' }
+      )
       .pipe(
         tap((res) => {
           localStorage.setItem('token', res.body.token)

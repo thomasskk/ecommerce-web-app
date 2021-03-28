@@ -33,7 +33,7 @@
 
 .container {
   @include flex(space-between);
-  flex-wrap: wrap;  
+  flex-wrap: wrap;
   margin: 15px 50px 70px 50px;
 }
 
@@ -61,7 +61,6 @@
     }
   }
 
-  
   button {
     border: none;
     height: 50px;

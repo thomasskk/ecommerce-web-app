@@ -12,13 +12,13 @@
         <div class="img">
           <img src="{{ item.image }}" />
         </div>
-  
+
         <div class="textItem">
           <p class="namePrice">
             {{ item.name }} <br />
             {{ item.price }} $
           </p>
-  
+
           <select
             #select
             class="quantity"
@@ -58,15 +58,15 @@
           <span>4,99 $</span>
         </div>
       </ng-container>
-  
+
       <hr />
       <div class="total">
         <span>Total:</span>
-        <span>{{ total != 0 ? total+4.99 +" $" : '0 $' }}</span>
+        <span>{{ total != 0 ? total + 4.99 + ' $' : '0 $' }}</span>
       </div>
-      <button class="finish" [attr.disabled]="total === 0 ? true : null">CONTINUE TO CHECKOUT</button>
+      <button class="finish" [attr.disabled]="total === 0 ? true : null">
+        CONTINUE TO CHECKOUT
+      </button>
     </div>
   </div>
-  
-
 </div>

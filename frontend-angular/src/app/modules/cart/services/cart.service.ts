@@ -32,7 +32,7 @@ export class CartService {
     return this.http.post<any>(`${GlobalVariable.API_URL}/cart/remove/${itemName}`, null)
   }
 
-  changeQuantity(itemName: string, quantity : number){   
+  changeQuantity(itemName: string, quantity: number) {
     return this.http.post<any>(`${GlobalVariable.API_URL}/cart/${quantity}/${itemName}`, null)
   }
 }

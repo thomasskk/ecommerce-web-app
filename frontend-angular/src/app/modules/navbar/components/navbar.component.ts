@@ -14,7 +14,6 @@ export class NavbarComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.page = parseInt(params['page'])
     })
-
   }
 
   cartCount: number = 0

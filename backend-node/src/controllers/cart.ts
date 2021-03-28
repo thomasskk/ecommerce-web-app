@@ -9,8 +9,6 @@ const addItem = async (req: Request, res: Response) => {
   try {
     const name = decodeURIComponent(req.params.name)
     const username = res.locals.jwt.username
-    console.log(name);
-    
 
     let user = await User.findOne({ username }).exec()
     let item = await Item.findOne({ name }).exec()
@@ -64,7 +62,7 @@ const removeCartItem = async (req: Request, res: Response) => {
     let user = await User.findOne({ username }).exec()
 
     await user!.populate({ path: 'cart.item', model: 'Item' }).execPopulate()
-    
+
     user!.cart! = user!.cart!.filter((item: any) => item!.item!.name != itemName)
 
     await user!.save()
@@ -77,7 +75,7 @@ const removeCartItem = async (req: Request, res: Response) => {
   }
 }
 
-const changeQuantity = async (req: Request, res: Response) => {  
+const changeQuantity = async (req: Request, res: Response) => {
   try {
     const quantity = parseInt(req.params.quantity)
     const itemName = decodeURIComponent(req.params.name)
@@ -89,7 +87,7 @@ const changeQuantity = async (req: Request, res: Response) => {
     let index = user!.cart!.findIndex((item: any) => item!.item!.name === itemName)
 
     user!.cart![index].quantity = quantity
-    
+
     await user!.save()
     return res.status(200).json(user!.cart!)
   } catch (error) {
@@ -99,8 +97,5 @@ const changeQuantity = async (req: Request, res: Response) => {
     })
   }
 }
-
-
-
 
 export default { addItem, getCart, removeCartItem, changeQuantity }
