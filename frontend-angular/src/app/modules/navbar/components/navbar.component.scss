@@ -40,37 +40,123 @@
 
   .utils {
     flex: 1;
-    display: flex;
-    justify-content: flex-end;
-  }
-  .logo {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    cursor: pointer;
-    outline: none;
-    @include resp(max-width, 1000) {
-      display: none;
+    @include flex(flex-end);
+    .cartButton {
+      &:hover,
+      .menuCart:hover {
+        .menuCart {
+          @include flex(none, none, column);
+        }
+      }
+      .menuCart {
+        * {
+          background: white;
+        }
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 35px;
+        width: 300px;
+        z-index: 5;
+        .itemContainer {
+          overflow: auto;
+          @include flex(space-between, none, column);
+          max-height: 300px;
+          .item {
+            margin: 10px;
+            @include flex(none, none, row);
+            .img {
+              flex: 0 0 100px;
+              background: #eae7e0;
+              img {
+                mix-blend-mode: multiply;
+                @include maxsize;
+              }
+            }
+            .textItem {
+              @include flex(space-between, none, column);
+              margin-left: 10px;
+              .namePrice {
+                margin-top: 10px;
+              }
+              .quantity {
+                border: 1px solid #d0d0d0;
+                height: 35px;
+                width: 50px;
+                outline: none;
+              }
+            }
+          }
+        }
+
+        .containerPay {
+          background: white;
+          padding: 20px;
+
+          .orderValue,
+          .shipping,
+          .total {
+            @include flex(space-between);
+          }
+          .orderValue {
+            margin-top: 25px;
+          }
+          hr {
+            margin: 20px 0 0 0;
+            height: 1px;
+            border: none;
+            background-color: black;
+          }
+          .total {
+            margin: 15px 0 20px 0;
+            span {
+              font-family: 'HMSansLatin-SemiBold';
+              font-size: 15px;
+            }
+          }
+          .finish {
+            border: none;
+            background: #222;
+            color: white;
+            height: 45px;
+            width: 100%;
+            &:disabled {
+              background: #e4e4e4;
+              color: #707794;
+              cursor: default;
+            }
+          }
+        }
+      }
+    }
+    .logo {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      cursor: pointer;
+      outline: none;
+      @include resp(max-width, 1000) {
+        display: none;
+      }
+    }
+    .home {
+      @include resp(min-width, 1000) {
+        display: none;
+      }
     }
   }
 
-  .home {
-    @include resp(min-width, 1000) {
+  @include resp(max-width, 1000) {
+    .logo,
+    .cartLabel,
+    .accountLabel,
+    .separator {
       display: none;
     }
-  }
-}
-
-@include resp(max-width, 1000) {
-  .logo,
-  .cartLabel,
-  .accountLabel,
-  .separator {
-    display: none;
-  }
-  button {
-    padding: 0 5px 0 5px;
-    width: 40px;
-    min-width: 0;
+    button {
+      padding: 0 5px 0 5px;
+      width: 40px;
+      min-width: 0;
+    }
   }
 }

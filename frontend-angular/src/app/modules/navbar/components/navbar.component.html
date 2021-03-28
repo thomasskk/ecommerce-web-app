@@ -10,14 +10,44 @@
     <button class="home" mat-button [routerLink]="['/home/0']">
       <mat-icon> home </mat-icon>
     </button>
-
-    <button mat-button [routerLink]="['/cart']">
-      <mat-icon
-        matBadge="{{ cartCount }}"
-        matBadgeColor="warn"
-        matBadgeSize="small"
-        class="cartIcon"
-      >
+    <button mat-button [routerLink]="['/cart']" class="cartButton" (mouseenter)="getCart()">
+      <div class="menuCart">
+        <div class="itemContainer">
+          <div class="item" *ngFor="let item of cartItems; let indexCart = index">
+            <div class="img">
+              <img src="{{ item.image }}" />
+            </div>
+            <div class="textItem">
+              <p class="namePrice">
+                {{ item.name }} <br />
+                {{ item.price }} $ <br />
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="containerPay">
+          <ng-container *ngIf="total != 0">
+            <div class="orderValue">
+              <span>ORDER VALUE</span>
+              <span>{{ total }} $</span>
+            </div>
+            <div class="shipping">
+              <span>Shipping</span>
+              <span>4,99 $</span>
+            </div>
+          </ng-container>
+    
+          <hr />
+          <div class="total">
+            <span>Total:</span>
+            <span>{{ total != 0 ? total + 4.99 + ' $' : '0 $' }}</span>
+          </div>
+          <button class="finish" [attr.disabled]="total === 0 ? true : null">
+            CONTINUE TO CHECKOUT
+          </button>
+        </div>
+      </div>
+      <mat-icon matBadge="" matBadgeColor="warn" matBadgeSize="small" class="cartIcon">
         shopping_basket
       </mat-icon>
       <label class="cartLabel">My cart</label>

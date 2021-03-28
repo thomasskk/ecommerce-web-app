@@ -1,7 +1,7 @@
 @import 'global';
 
 .body {
-  flex: (center, center);
+  @include flex(center, center);
   @include maxsize;
 }
 
@@ -10,7 +10,7 @@
   border-radius: 10px;
   border-color: black;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  flex: (center, center, column);
+  @include flex(center, center, column);
 
   button {
     width: 110px;
