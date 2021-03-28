@@ -2,15 +2,16 @@
 
 * {
   color: black;
-  background-color: white;
+  background: #faf9f8;
 }
 .navbar {
+
   @include flex();
   padding: 0 100px 0 100px;
   @include resp(max-width, 1000) {
     padding: 0 10px 0 10px;
   }
-
+  
   .search {
     flex: 1;
     display: flex;
@@ -18,7 +19,7 @@
     input {
       width: 40%;
       @include resp(max-width, 1000) {
-        width: 100%;
+        width: 60%;
       }
       outline: none;
       border: 0;

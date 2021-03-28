@@ -1,19 +1,36 @@
 <app-navbar></app-navbar>
 
 <div class="body">
-  <div class="container">
-    <div class="item" *ngFor="let item of cartItems; let index = index">
+  <div class="containerInfo">
+    <div class="item" *ngFor="let item of cartItems; let indexCart = index">
       <div class="img">
-        <img mat-card-image src="{{ item.image }}" alt="" />
+        <img src="{{ item.image }}" />
       </div>
-      <p class="name">{{ item.name }}</p>
-      <p class="price">Price : {{ item.price }}$</p>
-      <p class="quantity">x{{ item.quantity }}</p>
-      <mat-icon class="delete" (click)="removeItem(item.name)"> delete </mat-icon>
-    </div>
-    <div class="total">
-      <p>TOTAL &nbsp;</p>
-      <p style="font-weight: 600">{{ total }}$</p>
+
+      <div class="textItem">
+        <p class="namePrice">
+          {{ item.name }} <br />
+          {{ item.price }} $
+        </p>
+
+        <select #select class="quantity" (change)="changeQuantity(item.dname, select.value, indexCart)">
+          <option
+            *ngFor="let stock of [].constructor(item.stock); let indexStock = index"
+            [attr.selected]="indexStock + 1 === item.quantity ? true : null"
+            value="{{ indexStock + 1 }}" 
+            
+          >
+            {{ indexStock + 1 }}
+          </option>
+        </select>
+      </div>
+      <img
+        class="cross"
+        src="../../../../assets/cross.png"
+        alt=""
+        (click)="removeItem(item.dname, indexCart)"
+      />
     </div>
   </div>
+  <div class="containerPay"></div>
 </div>

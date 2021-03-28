@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.page = parseInt(params['page'])
+      this.page = Number(params['page'])
       this.setList()
     })
   }

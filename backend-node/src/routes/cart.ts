@@ -7,5 +7,6 @@ const router = express.Router()
 router.post('/cart/add/:name', extractJWT, controller.addItem)
 router.get('/cart', extractJWT, controller.getCart)
 router.post('/cart/remove/:name', extractJWT, controller.removeCartItem)
+router.post('/cart/:quantity/:name', extractJWT, controller.changeQuantity)
 
 export = router

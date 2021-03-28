@@ -6,17 +6,18 @@
     <hr />
     <h2>2021</h2>
   </div>
-  <img src="../../../../assets/1.jpg" alt="" />
+    <img  src="../../../../assets/1.png" alt="" />
 </div>
 
 <div class="container">
   <div class="item" *ngFor="let item of items$ | async">
-    <img src="{{ item.image }}" />
-    <p class="name">{{ item.name }}</p>
-    <p class="price">{{ item.price }}$</p>
-    <button (click)="addCart(item.name)">
-      <mat-icon class="addShop"> add_shopping_cart </mat-icon>
-    </button>
+    <div class="img">
+      <img src="{{ item.image }}" />
+      <img class="cartIcon" src="../../../../assets/cartIcon.svg" alt="" (click)="addCart(item.name)">
+    </div >
+      <p class="namePrice">{{ item.name }} <br> 
+        {{ item.price }} $
+      </p>  
   </div>
 </div>
 

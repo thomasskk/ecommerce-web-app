@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Observable } from 'rxjs'
 import { CartService } from '@cart/services/cart.service'
-import { CartItem } from '@cart/models/cartItem'
+import { CartItem } from '@modules/home/components/models/cartItem'
 
 @Component({
   selector: 'app-cart',
@@ -17,10 +17,18 @@ export class CartComponent implements OnInit {
     this.cartService.getCart().subscribe((data) => ((this.cartItems = data), this.setTotal()))
   }
 
-  removeItem(itemName: string) {
-    this.cartService.removeCartItem(itemName).subscribe()
-    this.cartItems = this.cartItems.filter((item) => item.name != itemName)
-    this.setTotal()
+  removeItem(itemName: string, index: number) {
+    this.cartService.removeCartItem(itemName).subscribe((success) => {
+      this.cartItems.splice(index, 1)
+      this.setTotal()
+    })
+  }
+
+  changeQuantity(itemName: string, quantity: string, index: number) {
+    this.cartService.changeQuantity(itemName, Number(quantity)).subscribe((success) => {
+      this.cartItems[index].quantity = Number(quantity)
+      this.setTotal()
+    })
   }
 
   setTotal() {

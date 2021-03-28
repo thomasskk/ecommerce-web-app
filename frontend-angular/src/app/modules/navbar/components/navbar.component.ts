@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
 import { AuthService } from '@auth/services/auth.service'
 
 @Component({
@@ -7,11 +8,17 @@ import { AuthService } from '@auth/services/auth.service'
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private route: ActivatedRoute) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe((params) => {
+      this.page = parseInt(params['page'])
+    })
+
+  }
 
   cartCount: number = 0
+  page: number = 0
 
   loggedIn() {
     return this.authService.loggedIn()

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { tap, map } from 'rxjs/operators'
-import { CartItem } from '@cart/models/cartItem'
+import { CartItem } from '@modules/home/components/models/cartItem'
 
 @Injectable({
   providedIn: 'root',
@@ -17,10 +17,12 @@ export class CartService {
       map((res) => {
         return res.map((item: any) => {
           return new CartItem(
+            item.item.name,
             item.item.name.split(/;|-/)[0],
             item.item.image.split(',')[0],
             item.item.price,
-            item.quantity
+            item.quantity,
+            item.item.stock
           )
         })
       })
@@ -29,5 +31,9 @@ export class CartService {
 
   removeCartItem(itemName: string) {
     return this.http.post<any>(`${this.Url}/cart/remove/${itemName}`, null)
+  }
+
+  changeQuantity(itemName: string, quantity : number){   
+    return this.http.post<any>(`${this.Url}/cart/${quantity}/${itemName}`, null)
   }
 }

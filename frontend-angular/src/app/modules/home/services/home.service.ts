@@ -17,7 +17,7 @@ export class HomeService {
       map((res) => {
         return res.map((item: any) => {
           return new Item(
-            item.name.split(/;|-/)[0],
+            item.name.split(/;|-|\(/)[0],
             item.image.split(',')[0],
             parseInt(item.price.toString().split('.')[0]),
             item.stock

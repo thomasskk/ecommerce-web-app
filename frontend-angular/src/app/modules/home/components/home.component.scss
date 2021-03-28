@@ -2,10 +2,14 @@
 
 .headerImg {
   @include flex(center, center);
+  margin-bottom: 50px;
+  @include resp(max-width, 700) {
+    display: none;
+  }
 
   img {
     @include maxsize;
-    object-fit: fill;
+    background: #eae7e0;
   }
 
   .text {
@@ -14,9 +18,8 @@
     position: absolute;
     display: flex;
     hr {
-      flex: 1;
       border: 1px solid black;
-      width: calc(3vw + 3vh);
+      width: 75px;
       margin-bottom: 2px;
     }
     h1 {
@@ -30,22 +33,35 @@
 
 .container {
   @include flex(space-between);
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
+  margin: 15px 50px 70px 50px;
 }
 
 .item {
-  @include flex(center, center, column);
-  border-radius: 8px 8px 15px 15px;
-  width: 250px;
-  margin: 30px;
-  @include resp(max-width, 1000) {
-    margin: 30px auto auto auto;
+  @include flex(none, none, column);
+  font-size: 13px;
+  margin: 0 2px 30px 2px;
+  flex: 1 1 350px;
+  .img {
+    background-color: #eae7e0;
+    position: relative;
+    .cartIcon {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 35px;
+      height: 35px;
+      padding: 5px;
+      cursor: pointer;
+    }
+    img {
+      @include maxsize;
+      background: white;
+      mix-blend-mode: multiply;
+    }
   }
 
-  img {
-    @include maxsize;
-    object-fit: scale-down;
-  }
+  
   button {
     border: none;
     height: 50px;
@@ -55,8 +71,9 @@
       vertical-align: middle;
     }
   }
-  .price {
-    font-weight: 800;
+
+  .namePrice {
+    margin: 15px 0 0 0;
   }
 }
 

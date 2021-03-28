@@ -1,42 +1,58 @@
 @import 'global';
 
 .body {
-  @include flex(center, center);
+  @include flex(center, none, row);
   @include maxsize;
+  height: auto;
+  margin-top: 250px;
 }
 
-.container {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  @include flex(center, none, column);
-  max-height: 700px;
+.containerInfo {
+  @include flex(space-between, none, column);
+  max-width: 500px;
+  overflow: hidden;
+  height: auto;
   .item {
-    display: flex;
-    height: 55px;
-    margin: 5px;
-    max-width: 700px;
+    position: relative;
+    margin: 10px;
+    @include flex(none, none, row);
+    font-size: 13px;
     .img {
+      flex-basis: 95px;
+      background-color: #eae7e0;
       img {
-        object-fit: contain;
-        flex: 1;
-        min-width: 0;
-        min-height: 0;
+        @include maxsize;
+        background: white;
+        mix-blend-mode: multiply;
       }
     }
-
-    .name {
-      width: 500px;
-      margin-right: 15px;
-    }
-    .price {
-      width: 100px;
-    }
-    .delete {
+    .textItem {
+      @include flex(space-between, none, column);
       margin-left: 10px;
+      .namePrice {
+        margin-top: 10px;
+      }
+      .quantity {
+        border: 1px solid #d0d0d0;
+        height: 35px;
+        width: 50px;
+        outline: none;
+      }
+    }
+    .cross {
+      width: 10px;
+      position: absolute;
+      right: 0;
+      padding: 5px;
       cursor: pointer;
     }
   }
-  .total {
-    @include flex(flex-end);
-    padding-right: 30px;
-  }
+}
+
+.containerPay{
+  @include flex();
+  position: sticky;
+  width: 200px;
+  height: 100px;
+  background: red;
 }

@@ -20,7 +20,7 @@ const createItem = async (req: Request, res: Response) => {
 }
 
 const ItemPage = async (req: Request, res: Response) => {
-  const LIMIT = 18
+  const LIMIT = 20
 
   const skip = parseInt(req.params.skip)
 
