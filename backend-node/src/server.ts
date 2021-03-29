@@ -5,8 +5,11 @@ import config from './config/config'
 import userRoutes from './routes/user'
 import itemRoutes from './routes/item'
 import cartRoutes from './routes/cart'
-
+import { Request, Response, NextFunction } from 'express'
+import fs from 'fs'
 import mongoose from 'mongoose'
+import path from 'path'
+import cors from 'cors'
 
 const NAMESPACE = 'Server'
 const router = express()
@@ -20,6 +23,7 @@ const connect = async () => {
   }
 }
 connect()
+
 
 router.use((req, res, next) => {
   logging.info(
@@ -55,12 +59,17 @@ router.use((req, res, next) => {
 
 router.use('/', userRoutes, itemRoutes, cartRoutes)
 
-router.use((req, res, next) => {
+router.use((req: Request, res: Response, next: NextFunction) => {
   const error = new Error('not found')
   return res.status(404).json({ message: error.message })
 })
 
-const httpServer = http.createServer(router)
+var options = {
+  key: fs.readFileSync('src/server.key'),
+  cert: fs.readFileSync('src/server.cert'),
+}
+
+const httpServer = http.createServer( router)
 httpServer.listen(config.server.port, () =>
   logging.info(NAMESPACE, `Server runnning on ${config.server.hostname}:${config.server.port}`)
 )

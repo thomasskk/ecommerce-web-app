@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { tap, map } from 'rxjs/operators'
+import { map } from 'rxjs/operators'
 import { Item } from '@home/models/item'
 import { GlobalVariable } from '@shared/globalVariable'
 
@@ -26,7 +26,7 @@ export class HomeService {
       })
     )
   }
-
+  
   addCart(itemName: string) {
     return this.http.post<any>(`${GlobalVariable.API_URL}/cart/add/${itemName}`, null)
   }

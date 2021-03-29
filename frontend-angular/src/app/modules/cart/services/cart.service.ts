@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable, OnInit } from '@angular/core'
+import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 import { CartItem } from '@modules/home/components/models/cartItem'
@@ -8,10 +8,9 @@ import { GlobalVariable } from '@shared/globalVariable'
 @Injectable({
   providedIn: 'root',
 })
-export class CartService implements OnInit {
+export class CartService {
+  
   constructor(private http: HttpClient) {}
-
-  ngOnInit() {}
 
   total = new BehaviorSubject<number>(0)
   cartItems = new BehaviorSubject<CartItem[]>([])
