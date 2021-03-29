@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { catchError, tap, map } from 'rxjs/operators'
+import { tap, map } from 'rxjs/operators'
 import { Item } from '@home/models/item'
 import { GlobalVariable } from '@shared/globalVariable'
 

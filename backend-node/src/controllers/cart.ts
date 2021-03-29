@@ -23,7 +23,8 @@ const getCart = async (req: Request, res: Response, next: NextFunction) => {
 const removeCartItem = async (req: Request, res: Response, next: NextFunction) => {
   const itemName = decodeURIComponent(req.params.name)
   const username = res.locals.jwt.username
-
+  console.log(itemName);
+  
   cartService
     .removeCartItem(itemName, username)
     .then(() => {

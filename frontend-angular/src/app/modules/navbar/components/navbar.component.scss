@@ -42,6 +42,9 @@
     flex: 1;
     @include flex(flex-end);
     .cartButton {
+      scrollbar-width: thin;
+      scrollbar-color: blue orange;
+
       &:hover,
       .menuCart:hover {
         .menuCart {
