@@ -1,6 +1,5 @@
-import { ObjectId } from 'bson'
 import mongoose, { Schema } from 'mongoose'
-import { createSchema, Type, typedModel, ExtractDoc, ExtractProps } from 'ts-mongoose'
+import { createSchema, Type, typedModel } from 'ts-mongoose'
 import { ItemSchema } from './item'
 
 const genders = ['male', 'female'] as const
@@ -27,5 +26,3 @@ const UserSchema = createSchema(
 )
 
 export const User = typedModel('User', UserSchema)
-export type UserDoc = ExtractDoc<typeof UserSchema>
-export type UserProps = ExtractProps<typeof UserSchema>
