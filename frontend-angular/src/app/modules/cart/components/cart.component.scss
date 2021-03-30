@@ -31,15 +31,21 @@ button {
 }
 
 .empty {
+  @include flex(center, center, column);
+
   background: white;
   padding: 32px;
   align-items: center;
   width: 25%;
-  @include flex(center, center, column);
+  @include resp(max-width, 700) {
+    width: 100%;
+    
+  }
   h2 {
     font-size: 25px;
     font-family: 'HMSansLatin-SemiBold';
   }
+
 }
 
 .containerInfo {
@@ -94,8 +100,9 @@ button {
     align-self: flex-start;
     position: sticky;
     top: 0;
+    min-width: 350px;
+
   }
-  min-width: 350px;
   background: white;
   padding: 20px;
   .discount {

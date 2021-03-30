@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { AuthService } from '@auth/services/auth.service'
-import { Router } from '@angular/router'
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent {
   constructor(
     private authService: AuthService,
     private fbuilder: FormBuilder,
-    private router: Router
+    private location: Location
   ) {}
 
   hide = true
@@ -26,7 +26,7 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.controls.username.value, this.loginForm.controls.password.value)
       .subscribe(
-        (success) => this.router.navigate(['/home/0']),
+        (success) => this.location.back(),
         (error) => alert(error.error.message)
       )
   }

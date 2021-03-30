@@ -3,13 +3,31 @@
 * {
   color: black;
   background: #faf9f8;
+  button{
+    cursor: pointer;
+  }
+  
 }
+
+
+
 .navbar {
   @include flex();
   padding: 0 100px 0 100px;
   @include resp(max-width, 1000) {
     padding: 0 10px 0 10px;
   }
+  .logo {
+    @include flex(center);
+    flex: 1;
+    cursor: pointer;
+    outline: none;
+    @include resp(max-width, 1000) {
+      display: none;
+    }
+  }
+
+
 
   .search {
     flex: 1;
@@ -18,7 +36,7 @@
     input {
       width: 40%;
       @include resp(max-width, 1000) {
-        width: 60%;
+        width: 80%;
       }
       outline: none;
       border: 0;
@@ -62,10 +80,11 @@
         width: 300px;
         z-index: 5;
         .itemContainer {
-          overflow: auto;
-          @include flex(space-between, none, column);
+          overflow: scroll;
+          overflow-x: hidden;
           max-height: 300px;
           .item {
+            font-size: 13px;
             margin: 10px;
             @include flex(none, none, row);
             .img {
@@ -81,12 +100,6 @@
               margin-left: 10px;
               .namePrice {
                 margin-top: 10px;
-              }
-              .quantity {
-                border: 1px solid #d0d0d0;
-                height: 35px;
-                width: 50px;
-                outline: none;
               }
             }
           }
@@ -132,20 +145,11 @@
         }
       }
     }
-    .logo {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      cursor: pointer;
-      outline: none;
-      @include resp(max-width, 1000) {
-        display: none;
-      }
-    }
     .home {
       @include resp(min-width, 1000) {
         display: none;
       }
+
     }
   }
 

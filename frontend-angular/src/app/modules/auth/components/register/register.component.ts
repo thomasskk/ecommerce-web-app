@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
-import { Router } from '@angular/router'
+import { Location } from '@angular/common';
 import { AuthService } from '@auth/services/auth.service'
 
 @Component({
@@ -12,7 +12,7 @@ export class RegisterComponent {
   constructor(
     private authService: AuthService,
     private fbuilder: FormBuilder,
-    private router: Router
+    private location: Location
   ) {}
   selectedGender = null
 
@@ -31,7 +31,7 @@ export class RegisterComponent {
 
   register() {
     this.authService.register(this.registerForm.value).subscribe(
-      (success) => this.router.navigate(['']),
+      (success) => this.location.back(),
       (error) => alert(error.error.message)
     )
   }

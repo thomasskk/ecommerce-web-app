@@ -10,7 +10,7 @@
     <button class="home" mat-button [routerLink]="['/home/0']">
       <mat-icon> home </mat-icon>
     </button>
-    <button mat-button [routerLink]="['/cart']" class="cartButton" (mouseenter)="getCart()">
+    <button mat-flat-button [routerLink]="['/cart']" class="cartButton" (mouseenter)="getCart()">
       <div class="menuCart">
         <div class="itemContainer">
           <div class="item" *ngFor="let item of cartItems; let indexCart = index">
@@ -19,8 +19,9 @@
             </div>
             <div class="textItem">
               <p class="namePrice">
-                {{ item.name }} <br />
-                {{ item.price }} $ <br />
+                {{ item.name }} <br/>
+                {{ item.price }} $  <br/>
+                Quantity : {{item.quantity}}
               </p>
             </div>
           </div>
@@ -54,12 +55,12 @@
     </button>
 
     <span style="margin-right: 10px" class="separator"></span>
-    <button mat-button [matMenuTriggerFor]="menuAccount">
+    <button mat-flat-button [matMenuTriggerFor]="menuAccount">
       <mat-icon> account_circle </mat-icon>
       <label class="accountLabel"> My account</label>
     </button>
     <mat-menu #menuAccount="matMenu">
-      <ng-container *ngIf="!loggedIn(); else logoutTemplate">
+      <ng-container *ngIf="loggedIn(); else logoutTemplate">
         <button [routerLink]="['/login']" mat-menu-item>
           <span>Login</span>
         </button>

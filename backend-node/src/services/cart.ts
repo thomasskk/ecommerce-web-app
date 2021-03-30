@@ -4,7 +4,6 @@ import { Item } from '../models/item'
 export class cartService {
   static getCart = async (username: string) => {
     let user = await User.findOne({ username }).exec()
-
     await user!.populate({ path: 'cart.item', model: 'Item' }).execPopulate()
     return user!.cart!
   }

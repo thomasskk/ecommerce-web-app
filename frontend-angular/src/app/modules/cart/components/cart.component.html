@@ -46,8 +46,11 @@
         </div>
         <button>ADD</button>
       </div>
-      <span>Login in to get the best offers !</span>
-      <button class="connect">LOGIN</button>
+      <ng-container *ngIf="loggedIn()">
+        <span>Login in to get the best offers !</span>
+        <button class="connect">LOGIN</button>
+      </ng-container>
+
       <ng-container *ngIf="total != 0">
         <div class="orderValue">
           <span>ORDER VALUE</span>

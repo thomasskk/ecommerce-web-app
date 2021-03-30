@@ -41,7 +41,7 @@ export class CartService {
   removeCartItem(itemName: string, index: number) {
     this.cartItems.value.splice(index, 1)
     this.setTotal()
-    this.http.post<any>(`${GlobalVariable.API_URL}/cart/remove/${itemName}`, null).subscribe()
+    this.http.post<any>(`${GlobalVariable.API_URL}/cart/remove/${itemName}`,null).subscribe()
   }
 
   changeQuantity(itemName: string, quantity: string, index: number) {

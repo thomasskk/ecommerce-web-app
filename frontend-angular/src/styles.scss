@@ -1,5 +1,14 @@
-@import url(https://db.onlinewebfonts.com/c/09c8fb44d2c62d99647e4ce58736293e?family=HMSansLatin-Regular);
-@import url(https://db.onlinewebfonts.com/c/c352028deedbafe44d35574c0214fedf?family=HMSansLatin-SemiBold);
+@font-face {
+  font-family: HMSansLatin-Regular;
+  src: url('./app/shared/fonts/HMSansLatin-Regular.woff2') format('woff2'), 
+    url('./app/shared/fonts/HMSansLatin-Regular.woff2') format('woff');
+}
+@font-face {
+  font-family: HMSansLatin-SemiBold;
+  src: url('./app/shared/fonts/HMSansLatin-SemiBold.woff2') format('woff2'), 
+    url('./app/shared/fonts/HMSansLatin-SemiBold.woff') format('woff');
+}
+
 html,
 body {
   height: 100%;

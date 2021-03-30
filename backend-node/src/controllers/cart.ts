@@ -12,6 +12,8 @@ const addItem = async (req: Request, res: Response, next: NextFunction) => {
 
 const getCart = async (req: Request, res: Response, next: NextFunction) => {
   const username = res.locals.jwt.username
+  console.log(req.body);
+   
   await cartService
     .getCart(username)
     .then((cart) => {

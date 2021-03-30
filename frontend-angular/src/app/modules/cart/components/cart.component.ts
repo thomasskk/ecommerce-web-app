@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { CartService } from '@cart/services/cart.service'
 import { CartItem } from '@home/components/models/cartItem'
+import { AuthService } from '@modules/auth/services/auth.service'
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,8 @@ export class CartComponent implements OnInit {
   total!: number
   cartItems!: CartItem[]
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService,
+    private authService: AuthService) {}
 
   ngOnInit() {
     this.cartService.setCart()
@@ -32,4 +34,10 @@ export class CartComponent implements OnInit {
   setTotal() {
     this.cartService.setTotal()
   }
+
+  loggedIn (){
+    return this.authService.loggedIn()
+  }
+
+
 }

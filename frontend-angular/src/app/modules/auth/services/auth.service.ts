@@ -38,6 +38,6 @@ export class AuthService {
   }
 
   loggedIn() {
-    return !!localStorage.getItem('token')
+    return !localStorage.getItem('token')
   }
 }

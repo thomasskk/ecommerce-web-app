@@ -12,6 +12,7 @@ const createItem = async (req: Request, res: Response, next: NextFunction) => {
 
 const ItemPage = async (req: Request, res: Response, next: NextFunction) => {
   const skip = parseInt(req.params.skip)
+  
   await itemService
     .ItemPage(skip)
     .then((item) => {

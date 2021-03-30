@@ -13,7 +13,8 @@ import { HomeComponent } from './modules/home/components/home.component'
 import { LoginComponent } from './modules/auth/components/login/login.component'
 import { RegisterComponent } from './modules/auth/components/register/register.component'
 import { AuthService } from './modules/auth/services/auth.service'
-import { TokenInterceptorRequest } from './modules/auth/services/interceptor'
+import { HttpErrorInterceptor, TokenInterceptor } from './modules/auth/services/interceptor'
+
 import { CartComponent } from './modules/cart/components/cart.component'
 
 @NgModule({
@@ -37,9 +38,14 @@ import { CartComponent } from './modules/cart/components/cart.component'
     AuthService,
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptorRequest,
+      useClass: TokenInterceptor,
       multi: true,
     },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpErrorInterceptor,
+      multi: true,
+    }
   ],
   bootstrap: [AppComponent],
 })
