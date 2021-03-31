@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express'
 import { cartService } from '../services/cart'
 
 const addItem = async (req: Request, res: Response, next: NextFunction) => {
-  const itemName = decodeURIComponent(req.params.name)
+  const itemName = String(req.query.name)
   const username = res.locals.jwt.username
 
   cartService
@@ -15,7 +15,6 @@ const addItem = async (req: Request, res: Response, next: NextFunction) => {
 
 const getCart = async (req: Request, res: Response, next: NextFunction) => {
   const username = res.locals.jwt.username
-
   await cartService
     .getCart(username)
     .then((cart) => {
@@ -25,8 +24,10 @@ const getCart = async (req: Request, res: Response, next: NextFunction) => {
 }
 
 const removeCartItem = async (req: Request, res: Response, next: NextFunction) => {
-  const itemName = decodeURIComponent(req.params.name)
+  const itemName = String(req.query.name)
   const username = res.locals.jwt.username
+  console.log(itemName);
+  
 
   cartService
     .removeCartItem(itemName, username)
@@ -37,8 +38,8 @@ const removeCartItem = async (req: Request, res: Response, next: NextFunction) =
 }
 
 const changeQuantity = async (req: Request, res: Response, next: NextFunction) => {
-  const quantity = parseInt(req.params.quantity)
-  const itemName = decodeURIComponent(req.params.name)
+  const quantity = Number(req.query.quantity)
+  const itemName = String(req.query.name)
   const username = res.locals.jwt.username
 
   cartService

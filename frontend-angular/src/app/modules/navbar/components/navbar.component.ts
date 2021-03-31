@@ -19,7 +19,7 @@ export class NavbarComponent implements OnInit {
     private homeService: HomeService
   ) {}
 
-  cartItems$ = this.cartService.cartItems.pipe(shareReplay())
+  cartItems$ = this.cartService.cartItems
   total$ = this.cartService.total
 
   ngOnInit() {

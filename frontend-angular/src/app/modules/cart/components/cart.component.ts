@@ -11,7 +11,7 @@ import { shareReplay } from 'rxjs/operators'
 })
 export class CartComponent implements OnInit {
   total$ = this.cartService.total
-  cartItems$ = this.cartService.cartItems.pipe(shareReplay())
+  cartItems$ = this.cartService.cartItems
 
   constructor(private cartService: CartService, private authService: AuthService) {}
 

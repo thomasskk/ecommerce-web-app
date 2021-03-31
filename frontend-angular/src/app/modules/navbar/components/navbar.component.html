@@ -64,11 +64,11 @@
     </button>
 
     <span style="margin-right: 10px" class="separator"></span>
-    <button mat-flat-button [matMenuTriggerFor]="menuAccount">
+    <button mat-flat-button [matMenuTriggerFor]="menuAccount" class="userButton">
       <mat-icon> account_circle </mat-icon>
       <label class="accountLabel"> My account</label>
     </button>
-    <mat-menu #menuAccount="matMenu">
+    <mat-menu #menuAccount="matMenu" class="userMenu">
       <ng-container *ngIf="loggedIn(); else logoutTemplate">
         <button [routerLink]="['/login']" mat-menu-item>
           <span>Login</span>

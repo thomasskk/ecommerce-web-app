@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, share } from 'rxjs/operators'
 import { CartItem } from '@modules/home/components/models/cartItem'
 import { GlobalVariable } from '@shared/globalVariable'
 
@@ -21,7 +21,7 @@ export class CartService {
           return new CartItem(
             item.item.name,
             item.item.name.split(/;|-/)[0],
-            item.item.image.split(',')[0],
+            item.item.image.split(',')[0].replace(/^http:\/\//i, 'https://'),
             item.item.price,
             item.quantity,
             item.item.stock
@@ -38,6 +38,16 @@ export class CartService {
     })
   }
 
+  addCart(itemName: string) {
+    this.http
+      .post<any>(`${GlobalVariable.API_URL}/cart/add/`, null, {
+        params: {
+          name: itemName,
+        },
+      })
+      .subscribe((success) => this.setCart())
+  }
+
   setTotal() {
     this.total.next(0)
     for (let item of this.cartItems.value) {
@@ -48,12 +58,25 @@ export class CartService {
   removeCartItem(itemName: string, index: number) {
     this.cartItems.value.splice(index, 1)
     this.setTotal()
-    this.http.post<any>(`${GlobalVariable.API_URL}/cart/remove/${itemName}`, null).subscribe()
+    this.http
+      .post<any>(`${GlobalVariable.API_URL}/cart/remove/`, null, {
+        params: {
+          name: itemName,
+        }
+      })
+      .subscribe()
   }
 
   changeQuantity(itemName: string, quantity: string, index: number) {
     this.cartItems.value[index].quantity = Number(quantity)
     this.setTotal()
-    this.http.post<any>(`${GlobalVariable.API_URL}/cart/${quantity}/${itemName}`, null).subscribe()
+    this.http
+      .post<any>(`${GlobalVariable.API_URL}/cart/quantity/`, null, {
+        params: {
+          name: itemName,
+          quantity: String(quantity),
+        },
+      })
+      .subscribe()
   }
 }

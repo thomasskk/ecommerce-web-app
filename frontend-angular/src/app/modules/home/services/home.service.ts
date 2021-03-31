@@ -29,17 +29,12 @@ export class HomeService {
             return new Item(
               item.name,
               item.name.split(/;|-|\(/)[0],
-              item.image.split(',')[0],
+              item.image.split(',')[0].replace(/^http:\/\//i, 'https://'),
               parseInt(item.price.toString().split('.')[0]),
               item.stock
             )
           })
-        }),
-        shareReplay()
+        }),shareReplay()
       )
-  }
-
-  addCart(itemName: string) {
-    return this.http.post<any>(`${GlobalVariable.API_URL}/cart/add/${itemName}`, null)
   }
 }
