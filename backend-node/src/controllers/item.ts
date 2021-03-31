@@ -10,12 +10,10 @@ const createItem = async (req: Request, res: Response, next: NextFunction) => {
     .catch(next)
 }
 
-
 const ItemPage = async (req: Request, res: Response, next: NextFunction) => {
-
   const input = String(req.query.input)
-  const skip = Number(req.query.skip)  
-  
+  const skip = Number(req.query.skip)
+
   await itemService
     .ItemPage(skip, input)
     .then((itemCount) => {

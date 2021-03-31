@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable, ReplaySubject } from 'rxjs'
-import { map, share, shareReplay } from 'rxjs/operators'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { map, shareReplay } from 'rxjs/operators'
 import { Item } from '@home/models/item'
 import { GlobalVariable } from '@shared/globalVariable'
 import { ActivatedRoute } from '@angular/router'
@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router'
 })
 export class HomeService {
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
-  
+
   count = new BehaviorSubject<number>(0)
 
   setItems(skip: number, input: string): Observable<Item[]> {
@@ -31,10 +31,11 @@ export class HomeService {
               item.name.split(/;|-|\(/)[0],
               item.image.split(',')[0],
               parseInt(item.price.toString().split('.')[0]),
-              item.stock,
+              item.stock
             )
           })
-        }),shareReplay()
+        }),
+        shareReplay()
       )
   }
 

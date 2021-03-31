@@ -1,10 +1,9 @@
 <app-navbar></app-navbar>
 
-  
-  <div class="container" >
+<div class="container">
   <h1>Shopping bag</h1>
   <div class="core">
-    <div class="empty" *ngIf=" (total$ | async) === 0">
+    <div class="empty" *ngIf="(total$ | async) === 0">
       <h2>YOUR SHOPPING BAG IS EMPTY!</h2>
       <p>Sign in or login to save or access saved items in your shopping bag.</p>
     </div>
@@ -17,7 +16,7 @@
         <div class="textItem">
           <p class="namePrice">
             {{ item.name }} <br />
-            {{ item.price }} $ 
+            {{ item.price }} $
           </p>
 
           <select
@@ -55,7 +54,7 @@
       <ng-container *ngIf="(total$ | async) != 0">
         <div class="orderValue">
           <span>ORDER VALUE</span>
-          <span>{{ (total$ | async) }} $</span>
+          <span>{{ total$ | async }} $</span>
         </div>
         <div class="shipping">
           <span>Shipping</span>

@@ -5,15 +5,17 @@ const addItem = async (req: Request, res: Response, next: NextFunction) => {
   const itemName = decodeURIComponent(req.params.name)
   const username = res.locals.jwt.username
 
-  cartService.addItem(itemName, username).catch(next)
-
-  return res.status(200).json()
+  cartService
+    .addItem(itemName, username)
+    .then(() => {
+      return res.status(200).json()
+    })
+    .catch(next)
 }
 
 const getCart = async (req: Request, res: Response, next: NextFunction) => {
   const username = res.locals.jwt.username
-  console.log(req.body);
-   
+
   await cartService
     .getCart(username)
     .then((cart) => {
@@ -25,8 +27,7 @@ const getCart = async (req: Request, res: Response, next: NextFunction) => {
 const removeCartItem = async (req: Request, res: Response, next: NextFunction) => {
   const itemName = decodeURIComponent(req.params.name)
   const username = res.locals.jwt.username
-  console.log(itemName);
-  
+
   cartService
     .removeCartItem(itemName, username)
     .then(() => {

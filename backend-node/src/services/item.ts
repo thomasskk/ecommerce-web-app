@@ -15,13 +15,13 @@ export class itemService {
     return item
   }
 
-
   static ItemPage = async (skip: number, input: string) => {
     const LIMIT = 20
-    const count = await Item.find({ name: { $regex: input, $options : 'i' } }).count()  
-    const item = await Item.find({ name: { $regex: input, $options : 'i'} })
+    const count = await Item.find({ name: { $regex: input, $options: 'i' } }).count()
+    const item = await Item.find({ name: { $regex: input, $options: 'i' } })
       .skip(skip * LIMIT)
-      .limit(LIMIT).exec()        
-    return {item, count}
+      .limit(LIMIT)
+      .exec()
+    return { item, count }
   }
 }

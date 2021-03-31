@@ -1,8 +1,6 @@
-
-
-<mat-toolbar class="navbar" >
+<mat-toolbar class="navbar">
   <form class="search" (submit)="search()">
-    <input id="input" placeholder="Search Products"/>
+    <input id="input" placeholder="Search Products" />
     <mat-icon (click)="search()" type="submit">search</mat-icon>
   </form>
 
@@ -14,7 +12,7 @@
     </button>
     <button mat-flat-button [routerLink]="['/cart']" class="cartButton">
       <div class="menuCart">
-        <div class="itemContainer">        
+        <div class="itemContainer">
           <div class="item" *ngFor="let item of cartItems$ | async; let indexCart = index">
             <div class="img">
               <img src="{{ item.image }}" />
@@ -25,22 +23,23 @@
                 <br />
                 Price : {{ item.price }} $
                 <br />
-                Quantity : {{ item.quantity }}
-                <br /><br /><br />
-                <span style="font-family: 'HMSansLatin-SemiBold'">Total : {{  (total$ | async) }} $</span>
+                Quantity : {{ item.quantity }} <br /><br /><br />
+                <span style="font-family: 'HMSansLatin-SemiBold'"
+                  >Total : {{ total$ | async }} $</span
+                >
               </p>
             </div>
           </div>
         </div>
         <div class="containerPay">
-          <ng-container *ngIf=" (total$ | async) === 0">
+          <ng-container *ngIf="(total$ | async) === 0">
             <span style="font-family: 'HMSansLatin-SemiBold'">YOUR SHOPPING BAG IS EMPTY!</span>
           </ng-container>
 
-          <ng-container *ngIf=" (total$ | async) != 0">
+          <ng-container *ngIf="(total$ | async) != 0">
             <div class="orderValue">
               <span>ORDER VALUE</span>
-              <span>{{  (total$ | async) }} $</span>
+              <span>{{ total$ | async }} $</span>
             </div>
             <div class="shipping">
               <span>Shipping</span>
@@ -51,9 +50,9 @@
           <hr />
           <div class="total">
             <span>Total:</span>
-            <span>{{ (total$ | async) != 0 ?  (total$ | async)! + 4.99 + ' $' : '0 $' }}</span>
+            <span>{{ (total$ | async) != 0 ? (total$ | async)! + 4.99 + ' $' : '0 $' }}</span>
           </div>
-          <button class="finish" [attr.disabled]=" (total$ | async) === 0 ? true : null">
+          <button class="finish" [attr.disabled]="(total$ | async) === 0 ? true : null">
             CONTINUE TO CHECKOUT
           </button>
         </div>

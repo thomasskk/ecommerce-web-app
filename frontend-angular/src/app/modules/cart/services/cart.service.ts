@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable, OnInit } from '@angular/core'
-import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject } from 'rxjs'
-import { map, publishReplay, share } from 'rxjs/operators'
+import { Injectable } from '@angular/core'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { map } from 'rxjs/operators'
 import { CartItem } from '@modules/home/components/models/cartItem'
 import { GlobalVariable } from '@shared/globalVariable'
 
@@ -45,7 +45,6 @@ export class CartService {
     }
   }
 
-
   removeCartItem(itemName: string, index: number) {
     this.cartItems.value.splice(index, 1)
     this.setTotal()
@@ -57,5 +56,4 @@ export class CartService {
     this.setTotal()
     this.http.post<any>(`${GlobalVariable.API_URL}/cart/${quantity}/${itemName}`, null).subscribe()
   }
-
 }

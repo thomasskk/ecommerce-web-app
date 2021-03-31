@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core'
 import { CartService } from '@cart/services/cart.service'
 import { CartItem } from '@home/components/models/cartItem'
 import { AuthService } from '@modules/auth/services/auth.service'
-import { Item } from '@modules/home/models/item'
-import { Observable } from 'rxjs'
-import { map, share, shareReplay, take } from 'rxjs/operators'
+import { shareReplay } from 'rxjs/operators'
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +15,7 @@ export class CartComponent implements OnInit {
 
   constructor(private cartService: CartService, private authService: AuthService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   removeCartItem(itemName: string, index: number) {
     this.cartService.removeCartItem(itemName, index)

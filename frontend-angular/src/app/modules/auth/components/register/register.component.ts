@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
-import { Location } from '@angular/common';
+import { Location } from '@angular/common'
 import { AuthService } from '@auth/services/auth.service'
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
 import { AuthService } from '@auth/services/auth.service'
-import { Location } from '@angular/common';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-login',

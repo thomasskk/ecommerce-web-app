@@ -14,7 +14,6 @@ import { LoginComponent } from './modules/auth/components/login/login.component'
 import { RegisterComponent } from './modules/auth/components/register/register.component'
 import { AuthService } from './modules/auth/services/auth.service'
 import { HttpErrorInterceptor, TokenInterceptor } from './modules/auth/services/interceptor'
-
 import { CartComponent } from './modules/cart/components/cart.component'
 
 @NgModule({
@@ -45,7 +44,7 @@ import { CartComponent } from './modules/cart/components/cart.component'
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true,
-    }
+    },
   ],
   bootstrap: [AppComponent],
 })

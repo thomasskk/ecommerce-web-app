@@ -15,7 +15,6 @@ export class userService {
     if (!bcryptjs.compareSync(password, data!.password)) {
       throw { message: 'Password Mismatch' }
     }
-    console.log(signJWT(username))
 
     return signJWT(username)
   }

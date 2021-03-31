@@ -24,7 +24,6 @@ const connect = async () => {
 }
 connect()
 
-
 router.use((req, res, next) => {
   logging.info(
     NAMESPACE,
@@ -69,7 +68,7 @@ var options = {
   cert: fs.readFileSync('src/server.cert'),
 }
 
-const httpServer = http.createServer( router)
+const httpServer = http.createServer(router)
 httpServer.listen(config.server.port, () =>
   logging.info(NAMESPACE, `Server runnning on ${config.server.hostname}:${config.server.port}`)
 )

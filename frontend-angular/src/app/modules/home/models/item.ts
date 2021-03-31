@@ -4,6 +4,6 @@ export class Item {
     public name: string,
     public image: string,
     public price: number,
-    public stock: number  ) {}
+    public stock: number
+  ) {}
 }
-

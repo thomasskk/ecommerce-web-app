@@ -4,8 +4,7 @@ import { AuthService } from '@auth/services/auth.service'
 import { CartService } from '@cart/services/cart.service'
 import { CartItem } from '@home/components/models/cartItem'
 import { HomeService } from '@home/services/home.service'
-import { BehaviorSubject, Observable } from 'rxjs'
-import { share, shareReplay, take } from 'rxjs/operators'
+import { shareReplay } from 'rxjs/operators'
 
 @Component({
   selector: 'app-navbar',
