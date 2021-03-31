@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core'
 import { CartService } from '@cart/services/cart.service'
 import { CartItem } from '@home/components/models/cartItem'
 import { AuthService } from '@modules/auth/services/auth.service'
+import { Item } from '@modules/home/models/item'
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-cart',
@@ -10,16 +12,15 @@ import { AuthService } from '@modules/auth/services/auth.service'
 })
 export class CartComponent implements OnInit {
   total!: number
-  cartItems!: CartItem[]
+  cartItems$!: Observable<CartItem[]>
 
   constructor(private cartService: CartService,
     private authService: AuthService) {}
 
   ngOnInit() {
     this.cartService.setCart()
-    this.cartService.cartItems$.subscribe(
-      (data) => ((this.cartItems = data), this.cartService.setTotal())
-    )
+    this.cartItems$ = this.cartService.cartItems$
+    this.cartService.setTotal()
     this.cartService.total$.subscribe((data) => (this.total = data))
   }
 
@@ -38,6 +39,5 @@ export class CartComponent implements OnInit {
   loggedIn (){
     return this.authService.loggedIn()
   }
-
 
 }

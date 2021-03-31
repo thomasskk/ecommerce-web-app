@@ -1,6 +1,7 @@
 <app-navbar></app-navbar>
 
-<div class="headerImg" *ngIf="page === 0">
+
+<div class="headerImg" *ngIf="page === 0 && isHeader != '0'">
   <div class="text">
     <h1>NEW COLLECTION</h1>
     <hr />
@@ -8,11 +9,14 @@
   </div>
   <img src="../../../../assets/1.png" alt="" />
 </div>
+<div class="noResult" *ngIf="!(items$ | async)?.length">
+  <h2>NO MATCHING ITEMS</h2>
+</div>
 
 <div class="container">
-  <div class="item" *ngFor="let item of items$ | async">
+  <div class="item" *ngFor="let item of items$ | async" >
     <div class="img">
-      <img src="{{ item.image }}" />
+      <img src="{{ item.image }}"/>
       <img
         class="cartIcon"
         src="../../../../assets/cartIcon.svg"
@@ -28,17 +32,27 @@
 </div>
 
 <div class="page">
-  <button *ngIf="page != 0" mat-raised-button [routerLink]="['/home/', page - 1]">Previous</button>
-  <ng-container *ngFor="let item of [].constructor(7); let index = index">
-    <button
-      mat-button
-      [routerLink]="['/home/', index - 3 + page]"
-      [style.text-decoration]="index === 3 ? 'underline' : 'none'"
-      *ngIf="index - 3 + page > -1"
-    >
-      {{ index - 3 + page }}
-    </button>
-  </ng-container>
+  <button
+    *ngIf="page != 0"
+    mat-raised-button
+    queryParamsHandling="merge"
+    [routerLink]="['/home/', page - 1]"
+  >
+    Previous
+  </button>
+    <ng-container *ngFor="let item of [].constructor(7); let index = index">
+      <button
+        mat-button
+        queryParamsHandling="merge"
+        [routerLink]="['/home/', index - 3 + page]"
+        [style.text-decoration]="index === 3 ? 'underline' : 'none'"
+        *ngIf="index - 3 + page > -1 && index -3 < count/20 - page"
+      >
+        {{ index - 3 + page }}
+      </button>
+    </ng-container>
 
-  <button mat-raised-button [routerLink]="['/home/', page + 1]">Next</button>
+  <button *ngIf="page != count" mat-raised-button queryParamsHandling="merge" [routerLink]="['/home/', page + 1]">
+    Next
+  </button>
 </div>

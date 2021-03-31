@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core'
+import { Router } from '@angular/router'
 import { AuthService } from '@auth/services/auth.service'
 import { CartService } from '@cart/services/cart.service'
 import { CartItem } from '@home/components/models/cartItem'
+import { HomeService } from '@home/services/home.service'
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-navbar',
@@ -9,21 +12,26 @@ import { CartItem } from '@home/components/models/cartItem'
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  constructor(private authService: AuthService, private cartService: CartService) {}
+  constructor(
+    private authService: AuthService,
+    private cartService: CartService,
+    private router: Router,
+    private homeService: HomeService
+  ) {}
 
   cartItems!: CartItem[]
   total!: number
 
   ngOnInit() {
-    this.getCart()
+    this.cartService.cartItems$.subscribe((data) => {
+      this.cartItems = data
+      this.cartService.setTotal()
+    })
+    this.cartService.total$.pipe(take(1)).subscribe((data) => (this.total = data))
   }
 
   getCart() {
     this.cartService.setCart()
-    this.cartService.cartItems$.subscribe(
-      (data) => ((this.cartItems = data), this.cartService.setTotal())
-    )
-    this.cartService.total$.subscribe((data) => (this.total = data))
   }
 
   loggedIn() {
@@ -33,5 +41,11 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.authService.logout()
     window.location.reload()
+  }
+
+  search() {
+    let input = (<HTMLInputElement>document.getElementById('input')).value
+    input = input.trim().replace(/\s+/g, ' ')
+    this.router.navigate([''], { queryParams: { input, header: 0 } })
   }
 }

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, publishReplay, share } from 'rxjs/operators'
 import { CartItem } from '@modules/home/components/models/cartItem'
 import { GlobalVariable } from '@shared/globalVariable'
 
@@ -9,7 +9,6 @@ import { GlobalVariable } from '@shared/globalVariable'
   providedIn: 'root',
 })
 export class CartService {
-  
   constructor(private http: HttpClient) {}
 
   total = new BehaviorSubject<number>(0)
@@ -35,13 +34,15 @@ export class CartService {
   }
 
   setCart() {
-    this.getCart().subscribe((data) => this.cartItems.next(data))
+    this.getCart().subscribe((data) => {
+      this.cartItems.next(data)
+    })
   }
 
   removeCartItem(itemName: string, index: number) {
     this.cartItems.value.splice(index, 1)
     this.setTotal()
-    this.http.post<any>(`${GlobalVariable.API_URL}/cart/remove/${itemName}`,null).subscribe()
+    this.http.post<any>(`${GlobalVariable.API_URL}/cart/remove/${itemName}`, null).subscribe()
   }
 
   changeQuantity(itemName: string, quantity: string, index: number) {
@@ -49,10 +50,12 @@ export class CartService {
     this.setTotal()
     this.http.post<any>(`${GlobalVariable.API_URL}/cart/${quantity}/${itemName}`, null).subscribe()
   }
-
+  
   setTotal() {
     this.total.next(0)
     for (let item of this.cartItems.value) {
+      console.log(item)
+
       this.total.next(this.total.value + item.price * item.quantity)
     }
   }

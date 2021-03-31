@@ -4,6 +4,7 @@ import { HomeComponent } from './modules/home/components/home.component'
 import { LoginComponent } from './modules/auth/components/login/login.component'
 import { RegisterComponent } from './modules/auth/components/register/register.component'
 import { CartComponent } from './modules/cart/components/cart.component'
+
 const routes: Routes = [
   { path: '', redirectTo: 'home/0', pathMatch: 'full' },
   { path: 'home/:page', component: HomeComponent },

@@ -3,13 +3,10 @@
 * {
   color: black;
   background: #faf9f8;
-  button{
+  button {
     cursor: pointer;
   }
-  
 }
-
-
 
 .navbar {
   @include flex();
@@ -26,8 +23,6 @@
       display: none;
     }
   }
-
-
 
   .search {
     flex: 1;
@@ -60,9 +55,6 @@
     flex: 1;
     @include flex(flex-end);
     .cartButton {
-      scrollbar-width: thin;
-      scrollbar-color: blue orange;
-
       &:hover,
       .menuCart:hover {
         .menuCart {
@@ -80,7 +72,7 @@
         width: 300px;
         z-index: 5;
         .itemContainer {
-          overflow: scroll;
+          overflow: auto;
           overflow-x: hidden;
           max-height: 300px;
           .item {
@@ -98,9 +90,9 @@
             .textItem {
               @include flex(space-between, none, column);
               margin-left: 10px;
-              .namePrice {
-                margin-top: 10px;
-              }
+              margin-top: 10px;
+              text-align: left;
+              line-height: normal;
             }
           }
         }
@@ -108,6 +100,7 @@
         .containerPay {
           background: white;
           padding: 20px;
+
 
           .orderValue,
           .shipping,
@@ -136,6 +129,7 @@
             color: white;
             height: 45px;
             width: 100%;
+            outline: none;
             &:disabled {
               background: #e4e4e4;
               color: #707794;
@@ -149,7 +143,6 @@
       @include resp(min-width, 1000) {
         display: none;
       }
-
     }
   }
 

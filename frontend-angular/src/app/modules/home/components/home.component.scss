@@ -1,5 +1,12 @@
 @import 'global';
 
+.noResult {
+  @include flex(center);
+  margin-top: 100px;
+  h2 {
+    font-family: 'HMSansLatin-SemiBold'
+  }
+}
 .headerImg {
   @include flex(center, center);
   margin-bottom: 50px;

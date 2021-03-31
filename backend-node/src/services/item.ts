@@ -1,4 +1,5 @@
 import { Item } from '../models/item'
+import { search } from '../routes/cart'
 
 export class itemService {
   static createItem = async (itemData: any) => {
@@ -14,12 +15,13 @@ export class itemService {
     return item
   }
 
-  static ItemPage = async (skip: number) => {
-    const LIMIT = 20
-    const item = await Item.find({})
-      .skip(skip * LIMIT)
-      .limit(LIMIT)
 
-    return item
+  static ItemPage = async (skip: number, input: string) => {
+    const LIMIT = 20
+    const count = await Item.find({ name: { $regex: input, $options : 'i' } }).count()  
+    const item = await Item.find({ name: { $regex: input, $options : 'i'} })
+      .skip(skip * LIMIT)
+      .limit(LIMIT).exec()        
+    return {item, count}
   }
 }
