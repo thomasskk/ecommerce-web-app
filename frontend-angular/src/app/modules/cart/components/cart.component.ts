@@ -4,6 +4,7 @@ import { CartItem } from '@home/components/models/cartItem'
 import { AuthService } from '@modules/auth/services/auth.service'
 import { Item } from '@modules/home/models/item'
 import { Observable } from 'rxjs'
+import { map, share, shareReplay, take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-cart',
@@ -11,18 +12,12 @@ import { Observable } from 'rxjs'
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  total!: number
-  cartItems$!: Observable<CartItem[]>
+  total$ = this.cartService.total
+  cartItems$ = this.cartService.cartItems.pipe(shareReplay())
 
-  constructor(private cartService: CartService,
-    private authService: AuthService) {}
+  constructor(private cartService: CartService, private authService: AuthService) {}
 
-  ngOnInit() {
-    this.cartService.setCart()
-    this.cartItems$ = this.cartService.cartItems$
-    this.cartService.setTotal()
-    this.cartService.total$.subscribe((data) => (this.total = data))
-  }
+  ngOnInit() { }
 
   removeCartItem(itemName: string, index: number) {
     this.cartService.removeCartItem(itemName, index)
@@ -36,8 +31,7 @@ export class CartComponent implements OnInit {
     this.cartService.setTotal()
   }
 
-  loggedIn (){
+  loggedIn() {
     return this.authService.loggedIn()
   }
-
 }

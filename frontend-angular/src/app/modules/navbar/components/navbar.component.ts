@@ -4,7 +4,8 @@ import { AuthService } from '@auth/services/auth.service'
 import { CartService } from '@cart/services/cart.service'
 import { CartItem } from '@home/components/models/cartItem'
 import { HomeService } from '@home/services/home.service'
-import { take } from 'rxjs/operators'
+import { BehaviorSubject, Observable } from 'rxjs'
+import { share, shareReplay, take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-navbar',
@@ -19,18 +20,10 @@ export class NavbarComponent implements OnInit {
     private homeService: HomeService
   ) {}
 
-  cartItems!: CartItem[]
-  total!: number
+  cartItems$ = this.cartService.cartItems.pipe(shareReplay())
+  total$ = this.cartService.total
 
   ngOnInit() {
-    this.cartService.cartItems$.subscribe((data) => {
-      this.cartItems = data
-      this.cartService.setTotal()
-    })
-    this.cartService.total$.pipe(take(1)).subscribe((data) => (this.total = data))
-  }
-
-  getCart() {
     this.cartService.setCart()
   }
 

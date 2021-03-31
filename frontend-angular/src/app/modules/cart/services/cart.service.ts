@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
-import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable } from 'rxjs'
+import { Injectable, OnInit } from '@angular/core'
+import { AsyncSubject, BehaviorSubject, Observable, ReplaySubject } from 'rxjs'
 import { map, publishReplay, share } from 'rxjs/operators'
 import { CartItem } from '@modules/home/components/models/cartItem'
 import { GlobalVariable } from '@shared/globalVariable'
@@ -13,8 +13,6 @@ export class CartService {
 
   total = new BehaviorSubject<number>(0)
   cartItems = new BehaviorSubject<CartItem[]>([])
-  total$ = this.total.asObservable()
-  cartItems$ = this.cartItems.asObservable()
 
   getCart(): Observable<CartItem[]> {
     return this.http.get<any>(`${GlobalVariable.API_URL}/cart/`).pipe(
@@ -36,8 +34,17 @@ export class CartService {
   setCart() {
     this.getCart().subscribe((data) => {
       this.cartItems.next(data)
+      this.setTotal()
     })
   }
+
+  setTotal() {
+    this.total.next(0)
+    for (let item of this.cartItems.value) {
+      this.total.next(this.total.value + item.price * item.quantity)
+    }
+  }
+
 
   removeCartItem(itemName: string, index: number) {
     this.cartItems.value.splice(index, 1)
@@ -50,13 +57,5 @@ export class CartService {
     this.setTotal()
     this.http.post<any>(`${GlobalVariable.API_URL}/cart/${quantity}/${itemName}`, null).subscribe()
   }
-  
-  setTotal() {
-    this.total.next(0)
-    for (let item of this.cartItems.value) {
-      console.log(item)
 
-      this.total.next(this.total.value + item.price * item.quantity)
-    }
-  }
 }

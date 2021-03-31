@@ -7,7 +7,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "start": "ts-node ./src/server.ts",
+    "start": "nodemon",
     "build-ts": "tsc",
     "postinstall": "npm run build-ts"
   },

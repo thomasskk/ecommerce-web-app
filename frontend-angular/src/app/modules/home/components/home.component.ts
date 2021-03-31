@@ -4,6 +4,7 @@ import { HomeService } from '@home/services/home.service'
 import { Item } from '@home/models/item'
 import { ActivatedRoute, Router } from '@angular/router'
 import { map, take } from 'rxjs/operators'
+import { CartService } from '@modules/cart/services/cart.service'
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,9 @@ export class HomeComponent implements OnInit {
   constructor(
     private homeService: HomeService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private cartService: CartService,
+
   ) {}
 
   page!: number
@@ -30,11 +33,12 @@ export class HomeComponent implements OnInit {
       this.page,
       this.route.snapshot.queryParamMap.get('input') || ''
     )
-    this.homeService.count.subscribe(data=> this.count = data)    
+    this.homeService.count.pipe(take(1)).subscribe(data=> this.count = data)    
   }
 
   addCart(itemName: string) {
     this.homeService.addCart(itemName).subscribe()
+    this.cartService.setCart()
   }
 }
 
