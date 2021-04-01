@@ -8,8 +8,11 @@
   </div>
   <img src="../../../../assets/1.png" alt="" />
 </div>
-<div class="noResult" *ngIf="!(items$ | async)?.length">
+<div class="noResult" *ngIf="!(items$ | async)?.length && (items$ | async)">
   <h2>NO MATCHING ITEMS</h2>
+</div>
+<div class="noResult" *ngIf="!(items$ | async)">
+  <h2>LOADING PAGE...</h2>
 </div>
 
 <div class="container">
@@ -30,7 +33,7 @@
   </div>
 </div>
 
-<div class="page">
+<div class="page" *ngIf="(items$ | async)">
   <button
     *ngIf="page != 0"
     mat-raised-button

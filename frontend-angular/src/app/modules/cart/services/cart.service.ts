@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
-import { map, share } from 'rxjs/operators'
+import { map, share, shareReplay } from 'rxjs/operators'
 import { CartItem } from '@modules/home/components/models/cartItem'
 import { GlobalVariable } from '@shared/globalVariable'
 
@@ -27,7 +27,7 @@ export class CartService {
             item.item.stock
           )
         })
-      })
+      }),shareReplay()
     )
   }
 

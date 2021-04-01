@@ -3,7 +3,7 @@ import { Observable } from 'rxjs'
 import { HomeService } from '@home/services/home.service'
 import { Item } from '@home/models/item'
 import { ActivatedRoute, Router } from '@angular/router'
-import { take } from 'rxjs/operators'
+import { first, take } from 'rxjs/operators'
 import { CartService } from '@modules/cart/services/cart.service'
 
 @Component({
@@ -19,17 +19,23 @@ export class HomeComponent implements OnInit {
     private cartService: CartService
   ) {}
 
-  page = Number(this.route.snapshot.paramMap.get('page'))
-  items$ = this.homeService.setItems(
-    this.page,
-    this.route.snapshot.queryParamMap.get('input') || ''
-  )
-  count!: number
+  page= Number(this.route.snapshot.paramMap.get('page'))
+  
+  items$!: Observable <Item[]>
+  count!: number  
   isHeader = this.route.snapshot.queryParamMap.get('header')
 
-  async ngOnInit() {
+  ngOnInit() {
+        
+    console.log(this.items$);
+    this.items$ = this.homeService.setItems(
+      this.page,
+      this.route.snapshot.queryParamMap.get('input') || ''
+    )
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
-    this.homeService.count.pipe(take(1)).subscribe((data) => (this.count = data))
+
+      this.homeService.count$.pipe(take(2)).subscribe(data => 
+        {this.count = data})
   }
 
   addCart(itemName: string) {

@@ -44,7 +44,7 @@ import { CartComponent } from './modules/cart/components/cart.component'
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true,
-    },
+    }
   ],
   bootstrap: [AppComponent],
 })
