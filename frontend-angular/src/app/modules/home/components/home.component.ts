@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
 
   async ngOnInit() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
-    this.homeService.count.pipe(take(1)).subscribe((data) => (this.count = data))
+    this.homeService.count.pipe(take(2)).subscribe((data) => (this.count = data))
   }
 
   addCart(itemName: string) {
