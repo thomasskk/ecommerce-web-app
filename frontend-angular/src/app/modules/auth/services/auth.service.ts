@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { tap } from 'rxjs/operators'
 import { GlobalVariable } from '@shared/globalVariable'
+import { tap } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
@@ -38,6 +38,6 @@ export class AuthService {
   }
 
   loggedIn() {
-    return !localStorage.getItem('token')
+    return !!localStorage.getItem('token')
   }
 }

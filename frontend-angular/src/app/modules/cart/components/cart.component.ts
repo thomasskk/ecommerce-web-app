@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core'
-import { CartService } from '@cart/services/cart.service'
+import { CartGuestService } from '@cart/services/cartGuest.service'
 import { CartItem } from '@home/components/models/cartItem'
 import { AuthService } from '@modules/auth/services/auth.service'
-import { shareReplay } from 'rxjs/operators'
+import { CartConnectedService } from '@modules/cart/services/cartConnected.service'
+import { BehaviorSubject } from 'rxjs'
 
 @Component({
   selector: 'app-cart',
@@ -10,23 +11,41 @@ import { shareReplay } from 'rxjs/operators'
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  total$ = this.cartService.total
-  cartItems$ = this.cartService.cartItems
+  total$ = this.cartConnectedService.total
+  cartItems$!: BehaviorSubject<CartItem[]>
 
-  constructor(private cartService: CartService, private authService: AuthService) {}
+  constructor(
+    private cartConnectedService: CartConnectedService,
+    private authService: AuthService,
+    private cartGuestService: CartGuestService
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    if (this.loggedIn()) {
+      this.cartConnectedService.setCart()
+      this.cartItems$ = this.cartConnectedService.cartItems
+      this.total$ = this.cartConnectedService.total
+    } else {
+      this.cartGuestService.setCart()
+      this.cartItems$ = this.cartGuestService.cartItems
+      this.total$ = this.cartGuestService.total
+    }
+  }
 
   removeCartItem(itemName: string, index: number) {
-    this.cartService.removeCartItem(itemName, index)
+    this.loggedIn()
+      ? this.cartConnectedService.removeCartItem(itemName, index)
+      : this.cartGuestService.removeCartItem(itemName, index)
   }
 
   changeQuantity(itemName: string, quantity: string, index: number) {
-    this.cartService.changeQuantity(itemName, quantity, index)
+    this.loggedIn()
+      ? this.cartConnectedService.changeQuantity(itemName, quantity, index)
+      : this.cartGuestService.changeQuantity(itemName, quantity, index)
   }
 
   setTotal() {
-    this.cartService.setTotal()
+    this.loggedIn() ? this.cartConnectedService.setTotal() : this.cartGuestService.setTotal()
   }
 
   loggedIn() {

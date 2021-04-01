@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { userService } from '../services/user'
 
 const login = async (req: Request, res: Response, next: NextFunction) => {

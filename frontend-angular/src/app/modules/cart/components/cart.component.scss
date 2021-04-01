@@ -127,13 +127,21 @@ button {
       width: 100%;
     }
   }
-  .connect {
-    margin-top: 5px;
-    border: 1px solid black;
-    background: inherit;
-    height: 45px;
-    width: 100%;
+  .registerConnect {
+    @include flex(space-between);
+    .connect,
+    .register {
+      margin-top: 5px;
+      border: 1px solid black;
+      background: inherit;
+      height: 45px;
+      width: 50%;
+    }
+    .connect {
+      margin-right: 10px;
+    }
   }
+
   .orderValue,
   .shipping,
   .total {

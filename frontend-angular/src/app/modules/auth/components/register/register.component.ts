@@ -1,6 +1,6 @@
+import { Location } from '@angular/common'
 import { Component } from '@angular/core'
 import { FormBuilder, Validators } from '@angular/forms'
-import { Location } from '@angular/common'
 import { AuthService } from '@auth/services/auth.service'
 
 @Component({
@@ -30,8 +30,13 @@ export class RegisterComponent {
   })
 
   register() {
-    this.authService.register(this.registerForm.value).subscribe(
-      (success) => this.location.back(),
+    let user = this.registerForm.value
+    user.cart = JSON.parse(localStorage.getItem('cartGuest')!)
+    localStorage.removeItem('cartGuest')
+    this.authService.register(user).subscribe(
+      (success) => {
+        this.location.back()
+      },
       (error) => alert(error.error.message)
     )
   }

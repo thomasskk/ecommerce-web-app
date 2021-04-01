@@ -1,13 +1,14 @@
-import express from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import controller from '../controllers/item'
-import extractJWT from '../middleware/extractJWT'
-import { Request, Response, NextFunction } from 'express'
 
 const router = express.Router()
 
-router.get('/item/', controller.ItemPage)
+router.get('/item/page/', controller.ItemPage)
+router.get('/item/get/', controller.getItem)
 
 router.use((error: any, req: Request, res: Response, next: NextFunction) => {
+  console.log(error.message)
+
   return res.status(401).json({ message: error.message, error })
 })
 

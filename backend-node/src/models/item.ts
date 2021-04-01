@@ -1,4 +1,3 @@
-import mongoose, { Schema } from 'mongoose'
 import { createSchema, Type, typedModel } from 'ts-mongoose'
 
 export const ItemSchema = createSchema(

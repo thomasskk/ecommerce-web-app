@@ -46,9 +46,12 @@
         </div>
         <button>ADD</button>
       </div>
-      <ng-container *ngIf="loggedIn()">
-        <span>Login in to get the best offers !</span>
-        <button class="connect">LOGIN</button>
+      <ng-container *ngIf="!loggedIn()">
+        <span>Login or register in to get the best offers !</span>
+        <div class="registerConnect">
+          <button class="connect" [routerLink]="['/login']">LOGIN</button>
+          <button class="register" [routerLink]="['/register']">REGISTER</button>
+        </div>
       </ng-container>
 
       <ng-container *ngIf="(total$ | async) != 0">

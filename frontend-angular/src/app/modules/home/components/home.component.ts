@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core'
-import { Observable } from 'rxjs'
-import { HomeService } from '@home/services/home.service'
-import { Item } from '@home/models/item'
 import { ActivatedRoute, Router } from '@angular/router'
-import { first, take } from 'rxjs/operators'
-import { CartService } from '@modules/cart/services/cart.service'
+import { AuthService } from '@auth/services/auth.service'
+import { CartConnectedService } from '@cart/services/cartConnected.service'
+import { CartGuestService } from '@cart/services/cartGuest.service'
+import { Item } from '@home/models/item'
+import { HomeService } from '@home/services/home.service'
+import { Observable } from 'rxjs'
+import { take } from 'rxjs/operators'
 
 @Component({
   selector: 'app-home',
@@ -16,18 +18,18 @@ export class HomeComponent implements OnInit {
     private homeService: HomeService,
     private route: ActivatedRoute,
     private router: Router,
-    private cartService: CartService
+    private cartConnectedService: CartConnectedService,
+    private authService: AuthService,
+    private cartGuestService: CartGuestService
   ) {}
 
-  page= Number(this.route.snapshot.paramMap.get('page'))
-  
-  items$!: Observable <Item[]>
-  count!: number  
+  page = Number(this.route.snapshot.paramMap.get('page'))
+
+  items$!: Observable<Item[]>
+  count!: number
   isHeader = this.route.snapshot.queryParamMap.get('header')
 
   ngOnInit() {
-        
-    console.log(this.items$);
     this.items$ = this.homeService.setItems(
       this.page,
       this.route.snapshot.queryParamMap.get('input') || ''
@@ -37,6 +39,10 @@ export class HomeComponent implements OnInit {
   }
 
   addCart(itemName: string) {
-    this.cartService.addCart(itemName)
+    if (this.authService.loggedIn()) {
+      this.cartConnectedService.addCart(itemName)
+    } else {
+      this.cartGuestService.addCart(itemName)
+    }
   }
 }

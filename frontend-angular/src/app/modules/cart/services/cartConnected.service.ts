@@ -1,41 +1,41 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { BehaviorSubject, Observable } from 'rxjs'
-import { map, share, shareReplay } from 'rxjs/operators'
 import { CartItem } from '@modules/home/components/models/cartItem'
 import { GlobalVariable } from '@shared/globalVariable'
+import { BehaviorSubject } from 'rxjs'
+import { map, shareReplay } from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartConnectedService {
   constructor(private http: HttpClient) {}
 
   total = new BehaviorSubject<number>(0)
   cartItems = new BehaviorSubject<CartItem[]>([])
 
-  getCart(): Observable<CartItem[]> {
-    return this.http.get<any>(`${GlobalVariable.API_URL}/cart/`).pipe(
-      map((res) => {
-        return res.map((item: any) => {
-          return new CartItem(
-            item.item.name,
-            item.item.name.split(/;|-/)[0],
-            item.item.image.split(',')[0].replace(/^http:\/\//i, 'https://'),
-            item.item.price,
-            item.quantity,
-            item.item.stock
-          )
-        })
-      }),shareReplay()
-    )
-  }
-
   setCart() {
-    this.getCart().subscribe((data) => {
-      this.cartItems.next(data)
-      this.setTotal()
-    })
+    this.http
+      .get<any>(`${GlobalVariable.API_URL}/cart/get/`)
+      .pipe(
+        map((res) => {
+          return res.map((item: any) => {
+            return new CartItem(
+              item.item.name,
+              item.item.name.split(/;|-/)[0],
+              item.item.image.split(',')[0].replace(/^http:\/\//i, 'https://'),
+              item.item.price,
+              item.quantity,
+              item.item.stock
+            )
+          })
+        }),
+        shareReplay()
+      )
+      .subscribe((data) => {
+        this.cartItems.next(data)
+        this.setTotal()
+      })
   }
 
   addCart(itemName: string) {
@@ -62,7 +62,7 @@ export class CartService {
       .post<any>(`${GlobalVariable.API_URL}/cart/remove/`, null, {
         params: {
           name: itemName,
-        }
+        },
       })
       .subscribe()
   }

@@ -18,13 +18,18 @@
 <div class="container">
   <div class="item" *ngFor="let item of items$ | async">
     <div class="img">
-      <img src="{{ item.image }}" />
+      <img [src]="item.image" />
+
       <img
+        *ngIf="item.stock != 0; else outOfStock"
         class="cartIcon"
         src="../../../../assets/cartIcon.svg"
         alt=""
         (click)="addCart(item.dname)"
       />
+      <ng-template #outOfStock>
+        <img class="cartIcon" style="cursor: default" src="../../../../assets/out.svg" alt="" />
+      </ng-template>
     </div>
     <p class="namePrice">
       {{ item.name }} <br />
@@ -33,7 +38,7 @@
   </div>
 </div>
 
-<div class="page" *ngIf="(items$ | async)">
+<div class="page" *ngIf="items$ | async">
   <button
     *ngIf="page != 0"
     mat-raised-button

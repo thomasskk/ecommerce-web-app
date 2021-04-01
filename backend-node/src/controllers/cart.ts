@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { cartService } from '../services/cart'
 
 const addItem = async (req: Request, res: Response, next: NextFunction) => {
@@ -26,8 +26,7 @@ const getCart = async (req: Request, res: Response, next: NextFunction) => {
 const removeCartItem = async (req: Request, res: Response, next: NextFunction) => {
   const itemName = String(req.query.name)
   const username = res.locals.jwt.username
-  console.log(itemName);
-  
+  console.log(itemName)
 
   cartService
     .removeCartItem(itemName, username)

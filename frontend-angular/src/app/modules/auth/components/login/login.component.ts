@@ -26,7 +26,10 @@ export class LoginComponent {
     this.authService
       .login(this.loginForm.controls.username.value, this.loginForm.controls.password.value)
       .subscribe(
-        (success) => this.location.back(),
+        (success) => {
+          localStorage.removeItem('cartGuest')
+          this.location.back()
+        },
         (error) => alert(error.error.message)
       )
   }

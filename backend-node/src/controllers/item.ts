@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 import { itemService } from '../services/item'
 
 const createItem = async (req: Request, res: Response, next: NextFunction) => {
@@ -15,11 +15,23 @@ const ItemPage = async (req: Request, res: Response, next: NextFunction) => {
   const skip = Number(req.query.skip)
 
   await itemService
-    .ItemPage(skip, input)
+    .itemPage(skip, input)
     .then((itemCount) => {
       return res.status(200).json(itemCount)
     })
     .catch(next)
 }
 
-export default { createItem, ItemPage }
+const getItem = async (req: Request, res: Response, next: NextFunction) => {
+  const itemName = String(req.query.name)
+  console.log(itemName)
+
+  await itemService
+    .getItem(itemName)
+    .then((item) => {
+      return res.status(200).json(item)
+    })
+    .catch(next)
+}
+
+export default { createItem, ItemPage, getItem }

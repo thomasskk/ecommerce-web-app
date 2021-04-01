@@ -15,7 +15,7 @@ export class itemService {
     return item
   }
 
-  static ItemPage = async (skip: number, input: string) => {
+  static itemPage = async (skip: number, input: string) => {
     const LIMIT = 20
     const count = await Item.find({ name: { $regex: input, $options: 'i' } }).count()
     const item = await Item.find({ name: { $regex: input, $options: 'i' } })
@@ -23,5 +23,9 @@ export class itemService {
       .limit(LIMIT)
       .exec()
     return { item, count }
+  }
+
+  static getItem = async (name: string) => {
+    return Item.findOne({ name })
   }
 }

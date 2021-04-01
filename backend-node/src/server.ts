@@ -1,15 +1,12 @@
-import http from 'http'
-import express from 'express'
-import logging from './config/logging'
-import config from './config/config'
-import userRoutes from './routes/user'
-import itemRoutes from './routes/item'
-import cartRoutes from './routes/cart'
-import { Request, Response, NextFunction } from 'express'
+import express, { NextFunction, Request, Response } from 'express'
 import fs from 'fs'
+import http from 'http'
 import mongoose from 'mongoose'
-import path from 'path'
-import cors from 'cors'
+import config from './config/config'
+import logging from './config/logging'
+import cartRoutes from './routes/cart'
+import itemRoutes from './routes/item'
+import userRoutes from './routes/user'
 
 const NAMESPACE = 'Server'
 const router = express()
@@ -62,11 +59,6 @@ router.use((req: Request, res: Response, next: NextFunction) => {
   const error = new Error('not found')
   return res.status(404).json({ message: error.message })
 })
-
-var options = {
-  key: fs.readFileSync('src/server.key'),
-  cert: fs.readFileSync('src/server.cert'),
-}
 
 const httpServer = http.createServer(router)
 httpServer.listen(config.server.port, () =>
