@@ -33,9 +33,7 @@ export class HomeComponent implements OnInit {
       this.route.snapshot.queryParamMap.get('input') || ''
     )
     this.router.routeReuseStrategy.shouldReuseRoute = () => false
-
-      this.homeService.count$.pipe(take(2)).subscribe(data => 
-        {this.count = data})
+    this.homeService.count$.pipe(take(2)).subscribe((data) => (this.count = data))
   }
 
   addCart(itemName: string) {
