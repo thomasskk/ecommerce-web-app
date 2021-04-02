@@ -60,6 +60,7 @@
           @include flex(none, none, column);
         }
       }
+      outline: none;
       .menuCart {
         * {
           background: white;
@@ -142,6 +143,41 @@
         display: none;
       }
     }
+
+    .userButton{
+      &:hover, .userMenu:hover {
+        .userMenu{
+          @include flex(none, none, column);
+          
+        }
+      }
+    }
+    .userMenu{
+      *, &{
+        background: white;
+        font-family: 'HMSansLatin-SemiBold';
+            }
+      display: none;
+      position: absolute;
+      top: 35px;
+      right: 0;
+      width: 150px;
+      padding: 0 15px 0 15px;
+      border-radius: 7px;
+      hr {
+        margin: 0;
+        height: 1px;
+        border: none;
+        background-color: black;
+      }
+      button{
+        margin: 5px;
+        outline: none;
+        border: none;
+        padding: 5px;
+        align-items: center;
+      }
+    }
   }
 
   @include resp(max-width, 1000) {
@@ -151,7 +187,7 @@
     .separator {
       display: none;
     }
-    button {
+    .userButton, .cartButton {
       padding: 0 5px 0 5px;
       width: 40px;
       min-width: 0;

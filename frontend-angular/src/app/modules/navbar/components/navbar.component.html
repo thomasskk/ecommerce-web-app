@@ -10,7 +10,7 @@
     <button class="home" mat-button [routerLink]="['/home/0']">
       <mat-icon> home </mat-icon>
     </button>
-    <button mat-flat-button [routerLink]="['/cart']" class="cartButton">
+    <button mat-flat-button disableRipple="true" [routerLink]="['/cart']" class="cartButton">
       <div class="menuCart">
         <div class="itemContainer">
           <div class="item" *ngFor="let item of cartItems | async; let indexCart = index">
@@ -64,24 +64,26 @@
     </button>
 
     <span style="margin-right: 10px" class="separator"></span>
-    <button mat-flat-button [matMenuTriggerFor]="menuAccount" class="userButton">
+    <button mat-flat-button class="userButton">
       <mat-icon> account_circle </mat-icon>
       <label class="accountLabel"> My account</label>
+      <div class="userMenu">
+        <ng-container *ngIf="!loggedIn(); else logoutTemplate">
+          <button [routerLink]="['/login']" >
+            <span>LOGIN</span>
+          </button>
+          <hr>
+          <button [routerLink]="['/register']">
+            <span>REGISTER</span>
+          </button>
+        </ng-container>
+        <ng-template #logoutTemplate>
+          <button [routerLink]="['/home/0']" (click)="logout()" >
+            <span>LOGOUT</span>
+          </button>
+        </ng-template>
+      </div>
+  
     </button>
-    <mat-menu #menuAccount="matMenu" class="userMenu">
-      <ng-container *ngIf="!loggedIn(); else logoutTemplate">
-        <button [routerLink]="['/login']" mat-menu-item>
-          <span>Login</span>
-        </button>
-        <button [routerLink]="['/register']" mat-menu-item>
-          <span>Register</span>
-        </button>
-      </ng-container>
-      <ng-template #logoutTemplate>
-        <button [routerLink]="['/home/0']" (click)="logout()" mat-menu-item>
-          <span>Logout</span>
-        </button>
-      </ng-template>
-    </mat-menu>
   </div>
 </mat-toolbar>

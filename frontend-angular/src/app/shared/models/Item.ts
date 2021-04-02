@@ -1,10 +1,10 @@
-export class CartItem {
+export class Item {
   constructor(
     public dname: string,
     public name: string,
     public image: string,
     public price: number,
-    public quantity: number,
-    public stock: number
+    public stock: number,
+    public quantity: number
   ) {}
 }

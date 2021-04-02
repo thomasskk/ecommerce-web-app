@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
-import { Item } from '@home/models/item'
+import { Item } from '@shared/models/Item'
 import { GlobalVariable } from '@shared/globalVariable'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { map, shareReplay } from 'rxjs/operators'
@@ -32,7 +32,8 @@ export class HomeService {
               item.name.split(/;|-/)[0],
               item.image.split(',')[0].replace(/^http:\/\//i, 'https://'),
               parseInt(item.price.toString().split('.')[0]),
-              item.stock
+              item.stock,
+              1
             )
           })
         }),

@@ -17,6 +17,7 @@
   img {
     @include maxsize;
     background: #eae7e0;
+    background-size: cover;
   }
 
   .text {
@@ -64,7 +65,6 @@
     }
     img {
       @include maxsize;
-      background: white;
       mix-blend-mode: multiply;
     }
   }
@@ -86,6 +86,7 @@
 
 .page {
   @include flex(center, center);
-  overflow: hidden;
   padding-bottom: 75px;
+  min-width: 0;
+  overflow: scroll;
 }

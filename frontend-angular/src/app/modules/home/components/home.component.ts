@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { AuthService } from '@auth/services/auth.service'
 import { CartConnectedService } from '@cart/services/cartConnected.service'
 import { CartGuestService } from '@cart/services/cartGuest.service'
-import { Item } from '@home/models/item'
+import { Item } from '@shared/models/Item'
 import { HomeService } from '@home/services/home.service'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
@@ -38,11 +38,12 @@ export class HomeComponent implements OnInit {
     this.homeService.count$.pipe(take(2)).subscribe((data) => (this.count = data))
   }
 
-  addCart(itemName: string) {
+  addCart(item: Item) {
     if (this.authService.loggedIn()) {
-      this.cartConnectedService.addCart(itemName)
+      this.cartConnectedService.addCart(item.dname)
     } else {
-      this.cartGuestService.addCart(itemName)
+      item
+      this.cartGuestService.addCart(item)
     }
   }
 }

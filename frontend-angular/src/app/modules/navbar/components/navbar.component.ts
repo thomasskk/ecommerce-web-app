@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { AuthService } from '@auth/services/auth.service'
-import { CartItem } from '@home/components/models/cartItem'
+import { Item } from '@shared/models/Item'
 import { HomeService } from '@home/services/home.service'
 import { CartConnectedService } from '@modules/cart/services/cartConnected.service'
 import { CartGuestService } from '@modules/cart/services/cartGuest.service'
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
     private cartGuestService: CartGuestService
   ) {}
 
-  cartItems!: BehaviorSubject<CartItem[]>
+  cartItems!: BehaviorSubject<Item[]>
   total!: BehaviorSubject<number>
 
   ngOnInit() {

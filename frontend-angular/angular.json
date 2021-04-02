@@ -39,7 +39,9 @@
                 "src/app/shared"
               ]
             },
-            "scripts": []
+            "scripts": [
+              "node_modules/lazysizes/lazysizes.min.js"
+            ]
           },
           "configurations": {
             "production": {

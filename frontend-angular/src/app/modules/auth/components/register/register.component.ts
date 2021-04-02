@@ -32,9 +32,9 @@ export class RegisterComponent {
   register() {
     let user = this.registerForm.value
     user.cart = JSON.parse(localStorage.getItem('cartGuest')!)
-    localStorage.removeItem('cartGuest')
     this.authService.register(user).subscribe(
       (success) => {
+        localStorage.removeItem('cartGuest')
         this.location.back()
       },
       (error) => alert(error.error.message)

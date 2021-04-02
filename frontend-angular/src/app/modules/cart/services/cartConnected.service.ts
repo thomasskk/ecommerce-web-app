@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
-import { CartItem } from '@modules/home/components/models/cartItem'
+import { Item } from '@shared/models/Item'
 import { GlobalVariable } from '@shared/globalVariable'
 import { BehaviorSubject } from 'rxjs'
 import { map, shareReplay } from 'rxjs/operators'
@@ -12,7 +12,7 @@ export class CartConnectedService {
   constructor(private http: HttpClient) {}
 
   total = new BehaviorSubject<number>(0)
-  cartItems = new BehaviorSubject<CartItem[]>([])
+  cartItems = new BehaviorSubject<Item[]>([])
 
   setCart() {
     this.http
@@ -20,13 +20,13 @@ export class CartConnectedService {
       .pipe(
         map((res) => {
           return res.map((item: any) => {
-            return new CartItem(
+            return new Item(
               item.item.name,
               item.item.name.split(/;|-/)[0],
               item.item.image.split(',')[0].replace(/^http:\/\//i, 'https://'),
               item.item.price,
-              item.quantity,
-              item.item.stock
+              item.item.stock,
+              item.quantity
             )
           })
         })

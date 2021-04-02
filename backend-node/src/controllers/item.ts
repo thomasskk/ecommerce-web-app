@@ -24,7 +24,6 @@ const ItemPage = async (req: Request, res: Response, next: NextFunction) => {
 
 const getItem = async (req: Request, res: Response, next: NextFunction) => {
   const itemName = String(req.query.name)
-  console.log(itemName)
 
   await itemService
     .getItem(itemName)
