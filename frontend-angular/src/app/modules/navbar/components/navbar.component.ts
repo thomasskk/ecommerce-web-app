@@ -34,7 +34,6 @@ export class NavbarComponent implements OnInit {
       this.cartItems = this.cartGuestService.cartItems
       this.total = this.cartGuestService.total
     }
-    console.log(this.cartGuestService.total.value)
   }
 
   loggedIn() {

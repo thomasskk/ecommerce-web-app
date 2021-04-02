@@ -18,7 +18,7 @@ const connect = async () => {
   } catch (error) {
     logging.error(NAMESPACE, error.message, error)
   }
-}
+} 
 connect()
 
 router.use((req, res, next) => {

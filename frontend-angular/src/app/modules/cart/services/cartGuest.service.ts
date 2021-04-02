@@ -28,7 +28,6 @@ export class CartGuestService {
       })
       .pipe(
         map((item) => {
-          console.log(item)
           return new CartItem(
             item.name,
             item.name.split(/;|-/)[0],
@@ -61,10 +60,8 @@ export class CartGuestService {
   }
 
   removeCartItem(itemName: string, index: number) {
-    console.log(this.cartItems)
 
     this.cartItems.value.splice(index, 1)
-    console.log(this.cartItems)
 
     this.setTotal()
     localStorage.setItem('cartGuest', JSON.stringify(this.cartItems.value))

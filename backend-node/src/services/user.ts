@@ -36,7 +36,6 @@ export class userService {
         }
       })
     )
-    console.log(cart);
     
 
     const user = new User({

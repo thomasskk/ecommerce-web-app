@@ -29,8 +29,7 @@ export class CartConnectedService {
               item.item.stock
             )
           })
-        }),
-        shareReplay()
+        })
       )
       .subscribe((data) => {
         this.cartItems.next(data)

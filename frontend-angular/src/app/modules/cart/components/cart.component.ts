@@ -4,6 +4,7 @@ import { CartItem } from '@home/components/models/cartItem'
 import { AuthService } from '@modules/auth/services/auth.service'
 import { CartConnectedService } from '@modules/cart/services/cartConnected.service'
 import { BehaviorSubject } from 'rxjs'
+import { shareReplay } from 'rxjs/operators'
 
 @Component({
   selector: 'app-cart',
@@ -11,7 +12,7 @@ import { BehaviorSubject } from 'rxjs'
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-  total$ = this.cartConnectedService.total
+  total$!:BehaviorSubject<number>
   cartItems$!: BehaviorSubject<CartItem[]>
 
   constructor(
@@ -22,7 +23,6 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     if (this.loggedIn()) {
-      this.cartConnectedService.setCart()
       this.cartItems$ = this.cartConnectedService.cartItems
       this.total$ = this.cartConnectedService.total
     } else {
