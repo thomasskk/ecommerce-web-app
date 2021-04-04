@@ -2,7 +2,7 @@
 
 Inspired by H&M website
 
-First time using Angular, NodeJS, Express and Mongo.
+Project made while learning Angular, NodeJS, Express and Mongo.
 
 ToDo : 
 - Product size selection when buying
