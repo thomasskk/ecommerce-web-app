@@ -13,7 +13,7 @@ import { CartComponent } from './modules/cart/components/cart.component'
 import { HomeComponent } from './modules/home/components/home.component'
 import { NavbarComponent } from './modules/navbar/components/navbar.component'
 import { MaterialModule } from './shared/material.module'
-
+import {SafePipe} from '@shared/pipe/safe.pipe'
 
 @NgModule({
   declarations: [
@@ -23,6 +23,8 @@ import { MaterialModule } from './shared/material.module'
     LoginComponent,
     RegisterComponent,
     CartComponent,
+    [SafePipe]
+
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,7 @@ import { MaterialModule } from './shared/material.module'
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    RouterModule,
+    RouterModule
   ],
   providers: [
     AuthService,
@@ -43,8 +45,8 @@ import { MaterialModule } from './shared/material.module'
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
       multi: true,
-    },
+    }
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

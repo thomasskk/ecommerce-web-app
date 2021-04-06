@@ -7,6 +7,7 @@ import { Item } from '@shared/models/Item'
 import { HomeService } from '@home/services/home.service'
 import { Observable } from 'rxjs'
 import { take } from 'rxjs/operators'
+import {SafePipe} from '@shared/pipe/safe.pipe'
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,6 @@ export class HomeComponent implements OnInit {
   ) {}
 
   page = Number(this.route.snapshot.paramMap.get('page'))
-
   items$!: Observable<Item[]>
   count!: number
   isHeader = this.route.snapshot.queryParamMap.get('header')

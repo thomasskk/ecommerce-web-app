@@ -1,4 +1,4 @@
-import { createSchema, Type, typedModel } from 'ts-mongoose'
+import { createSchema, ExtractDoc, ExtractProps, Type, typedModel } from 'ts-mongoose'
 
 export const ItemSchema = createSchema(
   {
@@ -15,3 +15,5 @@ export const ItemSchema = createSchema(
 )
 
 export const Item = typedModel('Item', ItemSchema)
+export type ItemDoc = ExtractDoc<typeof ItemSchema>;
+export type ItemProps = ExtractProps<typeof ItemSchema>;

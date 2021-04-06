@@ -14,11 +14,10 @@
 <div class="noResult" *ngIf="!(items$ | async)">
   <h2>LOADING PAGE...</h2>
 </div>
-
 <div class="container">
   <div class="item" *ngFor="let item of items$ | async">
     <div class="img">
-      <img [src]="item.image" />
+      <img [src]="item.image | safe" />
 
       <img
         *ngIf="item.stock != 0; else outOfStock"
@@ -28,7 +27,12 @@
         (click)="addCart(item)"
       />
       <ng-template #outOfStock>
-        <img class="cartIcon" style="cursor: default" src="../../../../assets/out.svg" alt="" />
+        <img
+          class="cartIcon"
+          style="cursor: default"
+          src="../../../../assets/out.svg"
+          alt=""
+        />
       </ng-template>
     </div>
     <p class="namePrice">
@@ -58,7 +62,6 @@
       {{ index - 3 + page }}
     </button>
   </ng-container>
-
   <button
     *ngIf="page != count"
     mat-raised-button

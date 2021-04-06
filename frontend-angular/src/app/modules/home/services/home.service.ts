@@ -25,12 +25,13 @@ export class HomeService {
       .pipe(
         map((res) => {
           this.count$.next(res.count)
-
+          console.log(res.item);
+          
           return res.item.map((item: any) => {
             return new Item(
               item.name,
               item.name.split(/;|-/)[0],
-              item.image.split(',')[0].replace(/^http:\/\//i, 'https://'),
+              item.image,
               parseInt(item.price.toString().split('.')[0]),
               item.stock,
               1

@@ -10,7 +10,7 @@
     <div class="containerInfo">
       <div class="item" *ngFor="let item of cartItems$ | async; let indexCart = index">
         <div class="img">
-          <img src="{{ item.image }}" />
+          <img [src]="item.image | safe" />
         </div>
 
         <div class="textItem">

@@ -37,7 +37,6 @@ export class userService {
       })
     )
     
-
     const user = new User({
       firstName: userData.firstName,
       lastName: userData.lastName,
