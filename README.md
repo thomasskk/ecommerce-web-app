@@ -8,4 +8,4 @@ ToDo :
 - Product size selection when buying
 - Product own interface
 - Token Refresh
-- Lazy image loading
+- Category Menu
